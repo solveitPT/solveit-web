@@ -288,13 +288,16 @@ Esta diretriz aplica-se a toda a copy de `/servicos/seguranca` e `/servicos/back
 **Critérios de aceitação:** Sem bugs visuais/funcionais bloqueadores; copy revista e aprovada.
 **Resultado esperado:** Site pronto para deploy.
 
-### PHASE 11 — Deployment
-**Objetivo:** Publicar em produção.
+### PHASE 11 — Deployment ✅ SITE NO AR (`https://solve-it.pt`)
+**Resultado:** Repositório em [github.com/solveitPT/solveit-web](https://github.com/solveitPT/solveit-web). Deploy feito na Cloudflare (Workers & Pages, projeto `solveit-web`) via **upload estático manual** (não Git-conectado — a integração "Connect to Git" falhou por um erro temporário do lado do GitHub Apps; ficou registado como possível melhoria futura, sem urgência). Domínio `solve-it.pt` registado via dominios.pt, nameservers apontados para a Cloudflare (`mona.ns.cloudflare.com` / `peyton.ns.cloudflare.com`), domínio custom adicionado ao Worker. HTTPS automático confirmado a funcionar. Formulário de `/contactos` testado em produção com um envio real — confirmado a chegar a `solveit.email@gmail.com`.
+
+**Nota:** como o deploy é por upload manual, alterações futuras ao código exigem `npm run build` local + novo upload manual (ou reativar a ligação Git quando o erro do GitHub Apps resolver) — não há deploy automático a cada `git push` por agora.
+
+**Pendente:** submissão de sitemap ao Google Search Console; analytics (GA4, decidido no Discovery mas ainda não implementado); `www.solve-it.pt` como domínio adicional (opcional).
+
+**Objetivo (histórico):** Publicar em produção.
 **Tarefas:** Configurar domínio, SSL, DNS, variáveis de ambiente (email/analytics), deploy em produção, submissão de sitemap ao Google Search Console.
-**Dependências:** Phase 10.
-**Critérios de aceitação:** Site acessível no domínio final, formulário a funcionar em produção, analytics a registar eventos.
-**Riscos:** DNS/propagação, certificados SSL.
-**Resultado esperado:** Site em produção.
+**Riscos:** DNS/propagação, certificados SSL — ambos resolvidos sem incidentes de fundo (a exceção foi a perda do domínio `solveit.pt` original por um problema de verificação de email no registrador anterior, não relacionado com Cloudflare).
 
 ### PHASE 12 — Future improvements
 **Objetivo:** Roadmap pós-lançamento (não bloqueia o lançamento).
