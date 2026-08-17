@@ -266,18 +266,32 @@ Tier superior (quando a complexidade/dependência do cliente cresce)
 
 Não deve ser tratada como uma venda isolada — é o momento em que o cliente forma a primeira impressão real (não só o que o site diz). Isto já está implícito na estrutura do funil pedida.
 
-### 12.2 Onboarding pago para quem entra diretamente em avença
+### 12.2 Configuração inicial — incluída na avença, sem linha de preço própria
 
-**A minha recomendação:** cobrar um fee de onboarding/diagnóstico inicial para quem entra diretamente numa avença (sem ter passado por uma intervenção pontual primeiro).
+**Decisão (2026-08-17, substitui a recomendação anterior de fee de onboarding):** não existe cobrança separada de onboarding. O preço mensal de cada tier já inclui a configuração inicial standard necessária para começar o acompanhamento — o cliente escolhe a avença, e esse é o único valor que vê.
 
-**Porquê:** um levantamento real do ambiente de IT de uma empresa (equipamentos, acessos, estado de backups, rede, licenciamento) consome várias horas de trabalho genuíno e produz um resultado concreto (um retrato documentado da situação do cliente) — dar isto de graça contradiz o princípio "a avença vende responsabilidade, não horas grátis", e cria o mesmo problema que os pacotes de horas: um incentivo a gastar tempo sem cobrar.
+Nem no site nem em proposta comercial deve aparecer uma linha de "onboarding" ou "setup" com preço próprio. Não comunicar isto como promoção, oferta de lançamento, ou benefício para "primeiros clientes" — a SolveIT não deve transmitir que está numa fase inicial ou à procura dos primeiros clientes. É simplesmente como o preço funciona.
 
-**Proposta:** fee de onboarding de €150–€250 + IVA `[VALIDAR — hipótese, falta confirmar contra tempo real necessário]`, que inclui:
-- Levantamento do ambiente IT existente
-- Revisão inicial de segurança e backups
-- Configuração inicial do acompanhamento (acessos, prioridades, agenda de revisão)
+**Nota interna:** isto não significa que a configuração inicial não tenha custo real de tempo — tem, e esse custo está por medir (ver secção 12.3). A decisão de não o cobrar à parte nesta fase é comercial, não uma afirmação de que o trabalho não existe. Quando houver dados reais sobre o esforço de onboarding, pode fazer sentido introduzir uma regra comercial para configurações iniciais especialmente complexas — mas essa possibilidade não deve ser mencionada ao cliente nem publicada no site enquanto não for decidida.
 
-**Isenção/desconto:** se o cliente já teve uma intervenção pontual com a SolveIT nos últimos 30 dias antes de assinar a avença, esse fee é dispensado ou reduzido — a intervenção pontual já deu à SolveIT uma primeira visão real do ambiente do cliente `[VALIDAR regra exata — ex. dispensar completamente vs. desconto de 50%]`.
+### 12.3 Onboarding — processo interno (não publicar)
+
+Checklist de levantamento inicial, a preencher para cada novo cliente de avença — serve para (a) garantir que nada fica por verificar no arranque do acompanhamento, e (b) começar a medir internamente quanto tempo o onboarding real consome por cliente, para no futuro validar se faz sentido tratar configurações mais complexas de forma diferente.
+
+- [ ] **Equipamentos e utilizadores** — inventário de computadores, dispositivos móveis, quem usa o quê
+- [ ] **Sistemas operativos e software** — versões, licenciamento, software crítico ao negócio
+- [ ] **Microsoft 365 / email** — plano atual, domínios, caixas de correio, administração
+- [ ] **Backups** — o que já existe (se existir), onde, com que frequência, última verificação
+- [ ] **Segurança** — antivírus/EDR atual, MFA, gestão de passwords, atualizações em dia ou não
+- [ ] **Rede / Wi-Fi** — equipamento, cobertura, segmentação, quem tem acesso administrativo
+- [ ] **Impressoras e periféricos** — inventário e estado
+- [ ] **Acessos e permissões** — quem tem acesso a quê, contas partilhadas, ex-colaboradores com acesso ainda ativo
+- [ ] **Ferramentas de monitorização/gestão** — o que já está instalado (RMM, antivírus de gestão central, etc.), se houver
+- [ ] **Documentação** — o que o cliente já tem documentado sobre o próprio ambiente (frequentemente: nada)
+- [ ] **Problemas existentes** — o que o cliente já sabe que está mal ou preocupado
+- [ ] **Recomendações iniciais** — primeiras prioridades identificadas, a discutir com o cliente
+
+**Uso interno recomendado:** registar o tempo gasto em cada onboarding (por item da checklist, se possível) desde já — mesmo sem regra comercial nova, esses dados são o que falta para responder à secção 10.1 deste documento (custo real por cliente).
 
 ---
 
@@ -305,7 +319,7 @@ Não deve ser tratada como uma venda isolada — é o momento em que o cliente f
 - **Avença Profissional:** €299/mês + IVA — segurança, backups e M365 geridos continuamente; 1 intervenção presencial (até 2h) por mês.
 - **Avença Departamento IT:** desde €549/mês + IVA, ajustado à empresa — tudo do Profissional + redes geridas + consultoria contínua.
 - **Sem pacotes de horas em nenhum nível.**
-- **Onboarding pago (€150–250 + IVA) para quem entra direto em avença**, dispensado se vier de uma intervenção pontual recente.
+- **Sem linha de preço de onboarding** — a configuração inicial está incluída no preço mensal de qualquer tier; existe um processo interno de levantamento (checklist, secção 12.3), mas não é comunicado ao cliente como um item separado.
 - **Site:** preços visíveis para pontual, Tier 1 e Tier 2; Tier 3 por orçamento.
 
 Todos os valores em euros marcados acima são **hipóteses fundamentadas no benchmark de mercado**, não preços validados contra a economia real da SolveIT — ver secção 10.
@@ -317,7 +331,7 @@ Todos os valores em euros marcados acima são **hipóteses fundamentadas no benc
 1. **Benefício presencial do Tier 1:** confirmar "1 visita completa a cada 2 meses" (minha recomendação) vs. "1 visita todos os meses" (hipótese do benchmark, mais generosa mas por validar economicamente).
 2. **Os 5 inputs de custo da secção 10.1** — sem eles, os preços desta secção continuam a ser hipóteses, não uma decisão final de negócio.
 3. **Número máximo de clientes Tier 3 em simultâneo** (secção 10.3).
-4. **Valor exato do fee de onboarding e da regra de isenção** (secção 12.2).
+4. ~~Valor exato do fee de onboarding e da regra de isenção~~ — resolvido: não há fee, ver secção 12.2. Falta apenas começar a medir o tempo real de onboarding internamente (secção 12.3), para dados futuros.
 5. **Percentagem/valor exato do preço preferencial de intervenções presenciais adicionais em avença** (secções 4 e 5).
 6. **Cadência exata das revisões periódicas** nos Tiers 2 e 3 (trimestral? outra?).
 7. Confirmar se os nomes dos tiers (Essencial / Profissional / Departamento IT) são aprovados, ou se preferes outros.
