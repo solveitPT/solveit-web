@@ -318,7 +318,7 @@ Esta diretriz aplica-se a toda a copy de `/servicos/seguranca` e `/servicos/back
 |---|---|---|---|
 | 1 | Stack | **Astro + TypeScript + Tailwind** | Conforme recomendado. |
 | 2 | Hosting | **Cloudflare Pages** | Formulário de contacto usa Cloudflare Pages Functions. |
-| 3 | Domínio | **`solveit.pt`** — confirmado e registado (2026-08-17) | Decisão revista: inicialmente escolhido `.com` (secção 13 antiga), contrário à recomendação original. O cliente registou entretanto `solveit.pt` — alinhado com a recomendação inicial (reforço de "empresa portuguesa"/SEO local). Registado via Amen.pt (team.blue), a transferir DNS para Cloudflare. |
+| 3 | Domínio | **`solve-it.pt`** — confirmado e registado (2026-08-17) | Decisão revista duas vezes: inicialmente `.com` (secção 13 antiga), depois `solveit.pt` (registado via Amen.pt) — perdido por um problema de verificação de email na Amen, não recuperável a tempo. Domínio final: **`solve-it.pt`** (com hífen), registado via dominios.pt. Continua alinhado com a recomendação inicial (`.pt` para reforço de "empresa portuguesa"/SEO local); a transferir DNS para Cloudflare. |
 | 4 | Analytics | **Google Analytics 4** | Contrário à recomendação — implica banner de consentimento de cookies **obrigatório** (RGPD, opt-in antes do script carregar). Impacto direto em Phase 3 e Phase 8. |
 | 5 | Destino dos leads | **Só email** | Sem CRM/planilha nem WhatsApp na v1. |
 | 6 | Área de atuação | **Remoto: nacional. Presencial: Grande Lisboa / Margem Sul do Tejo.** | Usar exatamente esta área na copy e no schema `LocalBusiness` — não alargar sem validação. |
