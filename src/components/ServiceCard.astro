@@ -1,0 +1,61 @@
+---
+import Card from "./Card.astro";
+import IconContainer from "./IconContainer.astro";
+import Icon, { type IconName } from "./Icon.astro";
+
+interface Props {
+  icon: IconName;
+  title: string;
+  description: string;
+  href: string;
+  class?: string;
+}
+
+const { icon, title, description, href, class: className } = Astro.props;
+---
+
+<Card href={href} class:list={["service-card", className]}>
+  <IconContainer tone="graphite">
+    <Icon name={icon} size={22} />
+  </IconContainer>
+  <h3 class="service-card-title">{title}</h3>
+  <p class="service-card-desc">{description}</p>
+  <span class="service-card-link">
+    Saber mais
+    <Icon name="arrow-right" size={16} />
+  </span>
+</Card>
+
+<style>
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .service-card-title {
+    margin-top: 0.25rem;
+  }
+
+  .service-card-desc {
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+  }
+
+  .service-card-link {
+    margin-top: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-graphite);
+    transition: gap var(--duration-base) var(--ease-standard);
+  }
+
+  .service-card:hover .service-card-link {
+    gap: 0.625rem;
+    color: var(--color-amber-hover);
+  }
+</style>

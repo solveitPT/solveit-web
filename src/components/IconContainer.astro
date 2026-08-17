@@ -1,0 +1,38 @@
+---
+interface Props {
+  tone?: "graphite" | "amber";
+  size?: number;
+  class?: string;
+}
+
+const { tone = "graphite", size = 48, class: className } = Astro.props;
+---
+
+<span
+  class:list={["icon-container", `icon-container--${tone}`, className]}
+  style={{ "--icon-container-size": `${size}px` }}
+>
+  <slot />
+</span>
+
+<style>
+  .icon-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--icon-container-size);
+    height: var(--icon-container-size);
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+  }
+
+  .icon-container--graphite {
+    background: color-mix(in srgb, var(--color-graphite) 8%, transparent);
+    color: var(--color-graphite);
+  }
+
+  .icon-container--amber {
+    background: var(--color-amber-tint);
+    color: var(--color-amber-hover);
+  }
+</style>

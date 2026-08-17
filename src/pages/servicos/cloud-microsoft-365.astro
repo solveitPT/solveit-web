@@ -1,0 +1,247 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/Button.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import Icon from "../../components/Icon.astro";
+import FaqItem from "../../components/FaqItem.astro";
+import CtaSection from "../../components/CtaSection.astro";
+import FormGroup from "../../components/form/FormGroup.astro";
+import Input from "../../components/form/Input.astro";
+import Textarea from "../../components/form/Textarea.astro";
+import syncImage from "../../assets/images/office/laptop-phone-sync.jpg";
+
+const problems = [
+  "O email demora a sincronizar, ou fica indisponível sem aviso.",
+  "Cada pessoa guarda ficheiros no seu computador — e nunca sabe qual é a versão certa.",
+  "Não consegue aceder aos ficheiros da empresa fora do escritório.",
+  "Um novo colaborador demora dias a ficar com o email e acessos configurados.",
+];
+
+const scopeGroups = [
+  { title: "Email empresarial", description: "Configuração e gestão do email da sua equipa." },
+  { title: "Ficheiros e partilha", description: "OneDrive e SharePoint configurados para aceder aos ficheiros certos, de qualquer lado." },
+  { title: "Colaboração", description: "Teams e as ferramentas do dia a dia, configuradas para a forma como a equipa trabalha." },
+  { title: "Contas e licenças", description: "Criar, alterar e remover acessos Microsoft 365 quando a equipa muda." },
+];
+
+const steps = [
+  { title: "Avaliamos", description: "O que já tem configurado hoje, e o que falta." },
+  { title: "Configuramos ou migramos", description: "Para migrações simples, incluído; para migrações mais complexas de outro fornecedor de email, avaliamos e orçamentamos à parte." },
+  { title: "Configuramos os acessos", description: "Da sua equipa, um a um." },
+  { title: "Continuamos a gerir", description: "Alterações, novos utilizadores, e suporte quando precisar." },
+];
+
+const faqs = [
+  { question: "Já uso outro fornecedor de email — conseguem migrar para Microsoft 365?", answer: "Para migrações simples, sim, está incluído. Para migrações mais complexas, avaliamos e orçamentamos separadamente." },
+  { question: "Preciso de Microsoft 365 para toda a equipa, ou posso começar com alguns utilizadores?", answer: "Pode começar com o número de utilizadores que fizer sentido, e ir acrescentando conforme crescer." },
+  { question: "Os meus ficheiros ficam protegidos e com backup?", answer: "Podemos configurar proteção e backup também para os seus dados no Microsoft 365 — ver as páginas de Segurança e Backups para mais detalhe." },
+  { question: "Isto substitui o computador de cada pessoa?", answer: "Não — dá acesso a email, ficheiros e ferramentas a partir de qualquer computador ou telemóvel, sem substituir o equipamento que já tem." },
+  { question: "Quanto custa o Microsoft 365?", answer: "Depende do número de utilizadores e das funcionalidades que a sua empresa precisa — falamos consigo para encontrar o plano certo." },
+];
+---
+
+<BaseLayout
+  title="Cloud e Microsoft 365 para Empresas"
+  description="Configuração, gestão e suporte de Microsoft 365 — email empresarial, ficheiros e colaboração, disponíveis onde estiver, sem complicações técnicas."
+>
+  <section class="hero">
+    <div class="container-content hero-layout">
+      <div class="hero-text">
+        <a href="/servicos" class="breadcrumb">Serviços</a>
+        <h1>O seu email e os seus ficheiros, disponíveis onde estiver.</h1>
+        <p class="hero-sub body-lg">
+          Configuração, gestão e suporte de Microsoft 365 — email empresarial, ficheiros e colaboração, sem
+          complicações técnicas.
+        </p>
+        <div class="hero-actions">
+          <Button href="#contacto" variant="primary">Marcar uma conversa</Button>
+          <Button href="#o-que-tratamos" variant="secondary">Ver o que tratamos</Button>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <Image
+          src={syncImage}
+          alt="Portátil e telemóvel numa secretária, ambos com ecrãs sincronizados."
+          class="hero-image"
+          widths={[350, 500, 700]}
+          sizes="(min-width: 1024px) 22rem, (min-width: 768px) 30vw, 100vw"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Os problemas que isto resolve." />
+      <ul class="problem-list">
+        {problems.map((p) => <li>{p}</li>)}
+      </ul>
+      <p class="problem-close">Microsoft 365 resolve isto — quando está bem configurado.</p>
+    </div>
+  </section>
+
+  <section class="section" id="o-que-tratamos">
+    <div class="container-content">
+      <SectionHeading heading="O que tratamos." />
+      <div class="scope-grid">
+        {
+          scopeGroups.map((g) => (
+            <div class="scope-group">
+              <h3>{g.title}</h3>
+              <p>{g.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Como funciona." />
+      <ol class="steps-list">
+        {
+          steps.map((s, i) => (
+            <li>
+              <span class="steps-number">{String(i + 1).padStart(2, "0")}</span>
+              <span>
+                <strong>{s.title}</strong> — {s.description}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Segurança e continuidade dos seus dados." />
+      <p class="statement-body body-lg">
+        Os seus dados no Microsoft 365 podem beneficiar da mesma abordagem de proteção e backup do resto da sua
+        informática — ver <a href="/servicos/seguranca">Segurança</a> e <a href="/servicos/backups">Backups</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Pontual ou acompanhamento contínuo." />
+      <div class="modes-grid">
+        <div class="mode-block">
+          <h3>Pontual</h3>
+          <p>Configuração inicial do Microsoft 365, ou apoio pontual num problema específico, sem compromisso continuado.</p>
+        </div>
+        <div class="mode-block">
+          <h3>Avença</h3>
+          <p>Gestão contínua do email, ficheiros e colaboração da sua equipa, como parte do acompanhamento regular da sua informática.</p>
+        </div>
+      </div>
+      <a href="/solucoes" class="mode-link">
+        Conhecer a avença
+        <Icon name="arrow-right" size={16} />
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Perguntas frequentes." />
+      <div class="faq-list">
+        {
+          faqs.map((f) => (
+            <FaqItem question={f.question}>
+              <p>{f.answer}</p>
+            </FaqItem>
+          ))
+        }
+      </div>
+      <p class="faq-close">
+        Ainda tem dúvidas? <a href="#contacto" class="faq-close-link">Fale connosco</a>.
+      </p>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <CtaSection subheading="Descreva a sua situação atual — remoto em todo o país, presencial na Grande Lisboa e Margem Sul do Tejo." tone="graphite">
+      <Fragment slot="heading">Vamos organizar o seu email e ficheiros.</Fragment>
+      <form class="contact-form" method="post">
+        <div class="contact-form-row">
+          <FormGroup label="Nome" for="c-name" required>
+            <Input id="c-name" name="name" required />
+          </FormGroup>
+          <FormGroup label="Empresa" for="c-company" required>
+            <Input id="c-company" name="company" required />
+          </FormGroup>
+        </div>
+        <div class="contact-form-row">
+          <FormGroup label="Email" for="c-email" required>
+            <Input id="c-email" name="email" type="email" required />
+          </FormGroup>
+          <FormGroup label="Telefone" for="c-phone">
+            <Input id="c-phone" name="phone" type="tel" />
+          </FormGroup>
+        </div>
+        <FormGroup label="Mensagem" for="c-message">
+          <Textarea id="c-message" name="message" rows={4} />
+        </FormGroup>
+        <Button type="submit" variant="primary">Fale connosco</Button>
+      </form>
+    </CtaSection>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem); }
+  .hero-layout { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
+  @media (min-width: 768px) { .hero-layout { grid-template-columns: 1.6fr 1fr; gap: 3.5rem; } }
+  @media (min-width: 1024px) { .hero-layout { grid-template-columns: 2fr 1fr; } }
+  .hero-text { display: flex; flex-direction: column; align-items: flex-start; gap: 1.25rem; max-width: 40rem; }
+  .breadcrumb { font-family: var(--font-body); font-weight: 600; font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-muted); }
+  .breadcrumb:hover { color: var(--color-amber-hover); }
+  .hero-sub { color: var(--color-muted); }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.875rem; margin-top: 0.5rem; }
+  .hero-image-wrap { justify-self: end; width: 100%; max-width: 22rem; }
+  .hero-image { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-md); }
+
+  .section { padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem); border-top: 1px solid var(--color-border); }
+  .section-narrow { max-width: 56rem; }
+  .section :global(.section-heading) { margin-bottom: 2rem; }
+
+  .problem-list { display: flex; flex-direction: column; gap: 0.875rem; font-size: 1.0625rem; color: var(--color-text); }
+  .problem-list li { padding-left: 1.25rem; position: relative; }
+  .problem-list li::before { content: "—"; position: absolute; left: 0; color: var(--color-secondary); }
+  .problem-close { margin-top: 1.5rem; font-family: var(--font-heading); font-weight: 700; font-size: 1.125rem; }
+
+  .scope-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+  @media (min-width: 640px) { .scope-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem 2rem; } }
+  .scope-group h3 { margin-bottom: 0.5rem; }
+  .scope-group p { color: var(--color-muted); font-size: 0.9375rem; }
+
+  .steps-list { display: flex; flex-direction: column; gap: 1.25rem; }
+  .steps-list li { display: flex; gap: 1rem; align-items: baseline; }
+  .steps-number { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; font-size: 0.875rem; color: var(--color-amber-hover); flex-shrink: 0; font-variant-numeric: tabular-nums; }
+  .steps-list strong { font-family: var(--font-heading); }
+
+  .statement-body { color: var(--color-muted); max-width: var(--container-prose); }
+  .statement-body :global(a) { color: var(--color-graphite); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .statement-body :global(a:hover) { color: var(--color-amber-hover); }
+
+  .modes-grid { display: grid; grid-template-columns: 1fr; gap: 1.75rem; margin-bottom: 1.5rem; }
+  @media (min-width: 640px) { .modes-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; } }
+  .mode-block h3 { margin-bottom: 0.5rem; }
+  .mode-block p { color: var(--color-muted); }
+  .mode-link { display: inline-flex; align-items: center; gap: 0.375rem; font-family: var(--font-heading); font-weight: 600; font-size: 0.9375rem; color: var(--color-graphite); transition: gap var(--duration-base) var(--ease-standard); }
+  .mode-link:hover { gap: 0.625rem; color: var(--color-amber-hover); }
+
+  .faq-close { margin-top: 1.5rem; color: var(--color-muted); }
+  .faq-close-link { color: var(--color-graphite); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .faq-close-link:hover { color: var(--color-amber-hover); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.125rem; text-align: left; }
+  .contact-form-row { display: grid; grid-template-columns: 1fr; gap: 1.125rem; }
+  @media (min-width: 640px) { .contact-form-row { grid-template-columns: 1fr 1fr; } }
+  .contact-form :global(.form-label) { color: var(--color-surface); }
+  .contact-form :global(.form-hint) { color: color-mix(in srgb, var(--color-surface) 65%, transparent); }
+</style>

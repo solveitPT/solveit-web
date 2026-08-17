@@ -1,0 +1,137 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import Badge from "../../components/Badge.astro";
+
+const services = [
+  { name: "Suporte IT", description: "Suporte remoto e presencial para o dia a dia da sua equipa.", href: "/servicos/suporte-it", live: true },
+  { name: "Segurança", description: "Proteção de equipamentos e redução do risco de incidentes.", href: "/servicos/seguranca", live: true },
+  { name: "Backups", description: "Cópias de segurança automáticas e monitorizadas.", href: "/servicos/backups", live: true },
+  { name: "Cloud & Microsoft 365", description: "Email empresarial, ficheiros e colaboração, sempre disponíveis.", href: "/servicos/cloud-microsoft-365", live: true },
+  { name: "Redes & Wi-Fi", description: "Ligação estável e segura em todo o escritório.", href: "/servicos/redes-e-wifi", live: true },
+  { name: "Consultoria IT", description: "Decisões tecnológicas certas, sem complicar.", href: "/servicos/consultoria-it", live: true },
+];
+---
+
+<BaseLayout
+  title="Serviços"
+  description="Suporte IT, segurança, backups, cloud e Microsoft 365, redes e Wi-Fi, consultoria — tudo o que a SolveIT trata pela sua empresa."
+>
+  <section class="hero">
+    <div class="container-content hero-inner">
+      <h1>Serviços.</h1>
+      <p class="hero-sub body-lg container-prose">O que tratamos por si, explicado um a um.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-content">
+      <ul class="service-index">
+        {
+          services.map((s) =>
+            s.live ? (
+              <li>
+                <a href={s.href} class="service-index-row">
+                  <span class="service-index-name">{s.name}</span>
+                  <span class="service-index-desc">{s.description}</span>
+                  <Icon name="arrow-right" size={18} class="service-index-arrow" />
+                </a>
+              </li>
+            ) : (
+              <li>
+                <span class="service-index-row service-index-row--pending">
+                  <span class="service-index-name">{s.name}</span>
+                  <span class="service-index-desc">{s.description}</span>
+                  <Badge tone="graphite" class="service-index-pending-badge">Em breve</Badge>
+                </span>
+              </li>
+            )
+          )
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem) clamp(2rem, 1.5rem + 2vw, 3rem);
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .hero-sub {
+    color: var(--color-muted);
+  }
+
+  .section {
+    padding-block: 0 clamp(3rem, 2.2rem + 3vw, 5.5rem);
+  }
+
+  .service-index {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-index-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "name arrow" "desc desc";
+    align-items: center;
+    gap: 0.25rem 1rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+    transition: color var(--duration-base) var(--ease-standard);
+  }
+
+  @media (min-width: 768px) {
+    .service-index-row {
+      grid-template-columns: 14rem 1fr auto;
+      grid-template-areas: "name desc arrow";
+    }
+  }
+
+  .service-index-name {
+    grid-area: name;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: var(--color-graphite);
+  }
+
+  .service-index-desc {
+    grid-area: desc;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+  }
+
+  a.service-index-row :global(.service-index-arrow) {
+    grid-area: arrow;
+    color: var(--color-graphite);
+    transition: transform var(--duration-base) var(--ease-standard);
+  }
+
+  a.service-index-row:hover .service-index-name {
+    color: var(--color-amber-hover);
+  }
+
+  a.service-index-row:hover :global(.service-index-arrow) {
+    transform: translateX(4px);
+  }
+
+  .service-index-row--pending {
+    cursor: default;
+  }
+
+  .service-index-row--pending .service-index-name {
+    color: var(--color-secondary);
+  }
+
+  .service-index-pending-badge {
+    grid-area: arrow;
+  }
+</style>

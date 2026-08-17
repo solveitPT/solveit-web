@@ -1,0 +1,643 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import Card from "../components/Card.astro";
+import Badge from "../components/Badge.astro";
+import Icon from "../components/Icon.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import FaqItem from "../components/FaqItem.astro";
+import CtaSection from "../components/CtaSection.astro";
+import FormGroup from "../components/form/FormGroup.astro";
+import Input from "../components/form/Input.astro";
+import Textarea from "../components/form/Textarea.astro";
+import officeImage from "../assets/images/office/small-business-desk-daylight.jpg";
+import detailImage from "../assets/images/services/laptop-keyboard-detail.jpg";
+
+const services = [
+  { name: "Suporte IT", description: "Suporte remoto e presencial para o dia a dia da sua equipa.", href: "/servicos/suporte-it" },
+  { name: "Segurança", description: "Proteção de equipamentos e redução do risco de incidentes.", href: "/servicos/seguranca" },
+  { name: "Backups", description: "Cópias de segurança automáticas e monitorizadas.", href: "/servicos/backups" },
+  { name: "Cloud & Microsoft 365", description: "Email empresarial, ficheiros e colaboração, sempre disponíveis.", href: "/servicos/cloud-microsoft-365" },
+  { name: "Redes & Wi-Fi", description: "Ligação estável e segura em todo o escritório.", href: "/servicos/redes-e-wifi" },
+  { name: "Consultoria IT", description: "Decisões tecnológicas certas, sem complicar.", href: "/servicos/consultoria-it" },
+];
+
+const problems = [
+  "O computador trava, “o sistema está lento”.",
+  "Ninguém sabe ao certo onde estão os backups — ou se existem.",
+  "Um colaborador saiu da empresa e ainda tem acesso a tudo.",
+  "Sempre que há um problema, é preciso descobrir alguém que perceba disto.",
+];
+
+const steps = [
+  { title: "Fala connosco", description: "Conte-nos o que se passa, pontual ou contínuo." },
+  { title: "Avaliamos", description: "Olhamos para a sua situação atual, sem custos escondidos." },
+  { title: "Propomos um plano", description: "Pontual ou avença, à medida do negócio." },
+  { title: "Tratamos disto", description: "E continuamos por perto, antes de haver problema." },
+];
+
+const differentiators = [
+  "Falamos a sua língua, não a de informático.",
+  "Prevenção antes do problema — não esperamos que avarie.",
+  "Resposta rápida.",
+];
+
+const faqs = [
+  "Preciso de mudar de fornecedor de informática para experimentar?",
+  "Como funciona a avença mensal?",
+  "Trabalham só remotamente ou também presencialmente?",
+  "E se eu só precisar de ajuda uma vez?",
+  "Quanto tempo demora a primeira resposta?",
+];
+---
+
+<BaseLayout
+  title="Parceiro de IT para pequenas e médias empresas"
+  description="A SolveIT acompanha, mantém e protege a tecnologia da sua empresa como um parceiro externo — para se focar no que importa: o negócio."
+>
+  <!-- HERO — A Travessia -->
+  <section class="hero">
+    <div class="container-content hero-inner">
+      <h1 class="hero-headline">
+        <span class="hero-line hero-line--tense">Tenha um departamento de IT.</span>
+        <span class="hero-line hero-line--open">Sem ter de o <em class="hero-release">contratar.</em></span>
+      </h1>
+      <p class="hero-sub body-lg container-prose">
+        A SolveIT acompanha, mantém e protege a tecnologia da sua empresa como um parceiro externo — para se focar no que importa: o negócio.
+      </p>
+      <div class="hero-actions">
+        <Button href="#contacto" variant="primary">Marcar uma conversa</Button>
+        <Button href="#caminhos" variant="secondary">Ver como funciona a avença</Button>
+      </div>
+    </div>
+
+    <div class="container-content hero-meta" role="group" aria-label="Informação operacional">
+      <div class="hero-meta-item">
+        <p class="label">Modelo</p>
+        <p class="hero-meta-value">Avença mensal ou ajuda pontual</p>
+      </div>
+      <div class="hero-meta-item">
+        <p class="label">Área de atuação</p>
+        <p class="hero-meta-value">Remoto em todo o país · Presencial na Grande Lisboa e Margem Sul do Tejo</p>
+      </div>
+      <div class="hero-meta-item">
+        <p class="label">Primeiro passo</p>
+        <p class="hero-meta-value">Marcar uma conversa</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alguma vez isto lhe soou familiar? -->
+  <section class="section">
+    <div class="container-content problem-layout">
+      <div class="problem-text">
+        <SectionHeading heading="Alguma vez isto lhe soou familiar?" />
+        <ul class="problem-list">
+          {problems.map((p) => <li>{p}</li>)}
+        </ul>
+        <p class="problem-close">Não precisa de resolver isto sozinho.</p>
+      </div>
+      <div class="problem-image-wrap">
+        <Image
+          src={officeImage}
+          alt="Secretária de escritório com um portátil aberto, à luz natural de uma janela."
+          class="problem-image"
+          widths={[350, 500, 700]}
+          sizes="(min-width: 1024px) 22rem, (min-width: 768px) 30vw, 100vw"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Os dois caminhos -->
+  <section class="section" id="caminhos">
+    <div class="container-content">
+      <SectionHeading heading="Duas formas de trabalhar com a SolveIT." />
+      <div class="paths-grid">
+        <Card class="path-card">
+          <h3>Preciso de ajuda agora</h3>
+          <p class="path-body">Tem um problema concreto? Resolvemos pontualmente, sem compromisso.</p>
+          <a href="/servicos/suporte-it" class="path-link">
+            Pedir ajuda pontual
+            <Icon name="arrow-right" size={16} />
+          </a>
+        </Card>
+        <Card class="path-card path-card--recommended">
+          <Badge tone="amber" class="path-badge">Recomendado</Badge>
+          <h3>Quero deixar de me preocupar com isto</h3>
+          <p class="path-body">Um parceiro que acompanha, previne e mantém a sua informática todos os meses — sem surpresas.</p>
+          <a href="/solucoes" class="path-link">
+            Conhecer a avença
+            <Icon name="arrow-right" size={16} />
+          </a>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Serviços — índice editorial -->
+  <section class="section">
+    <div class="container-content">
+      <SectionHeading heading="O que tratamos por si." />
+      <ul class="service-index">
+        {
+          services.map((s) => (
+            <li>
+              <a href={s.href} class="service-index-row">
+                <span class="service-index-name">{s.name}</span>
+                <span class="service-index-desc">{s.description}</span>
+                <Icon name="arrow-right" size={18} class="service-index-arrow" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Pausa editorial — transição -->
+  <section class="section detail-break">
+    <div class="container-content">
+      <Image
+        src={detailImage}
+        alt="Detalhe de um portátil, cabo de rede e switch numa secretária de madeira."
+        class="detail-image"
+        widths={[500, 900, 1200]}
+        sizes="(min-width: 768px) 50vw, 90vw"
+      />
+    </div>
+  </section>
+
+  <!-- Como trabalhamos -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Simples, sem burocracia." />
+      <ol class="steps-list">
+        {
+          steps.map((s, i) => (
+            <li>
+              <span class="steps-number">{String(i + 1).padStart(2, "0")}</span>
+              <span>
+                <strong>{s.title}</strong> — {s.description}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Porque a SolveIT -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Porque escolher a SolveIT." />
+      <ul class="check-list">
+        {
+          differentiators.map((d) => (
+            <li>
+              <Icon name="check" size={18} />
+              <span>{d}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Perguntas frequentes." />
+      <div class="faq-list">
+        {
+          faqs.map((q) => (
+            <FaqItem question={q}>
+              <p>[Conteúdo a confirmar]</p>
+            </FaqItem>
+          ))
+        }
+      </div>
+      <p class="faq-close">
+        Ainda tem dúvidas? <a href="#contacto" class="faq-close-link">Fale connosco</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section id="contacto">
+    <CtaSection
+      subheading="Marque uma conversa sem compromisso — remoto em todo o país, presencial na Grande Lisboa e Margem Sul do Tejo."
+      tone="graphite"
+    >
+      <Fragment slot="heading">Vamos <em class="cta-resolve">resolver</em> a sua informática.</Fragment>
+      <form class="contact-form" method="post">
+        <div class="contact-form-row">
+          <FormGroup label="Nome" for="c-name" required>
+            <Input id="c-name" name="name" required />
+          </FormGroup>
+          <FormGroup label="Empresa" for="c-company" required>
+            <Input id="c-company" name="company" required />
+          </FormGroup>
+        </div>
+        <div class="contact-form-row">
+          <FormGroup label="Email" for="c-email" required>
+            <Input id="c-email" name="email" type="email" required />
+          </FormGroup>
+          <FormGroup label="Telefone" for="c-phone">
+            <Input id="c-phone" name="phone" type="tel" />
+          </FormGroup>
+        </div>
+        <FormGroup label="Mensagem" for="c-message">
+          <Textarea id="c-message" name="message" rows={4} />
+        </FormGroup>
+        <Button type="submit" variant="primary">Fale connosco</Button>
+      </form>
+    </CtaSection>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ============ Hero ============ */
+  .hero {
+    padding-block: clamp(3.5rem, 2.5rem + 4vw, 7rem) clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
+  }
+
+  .hero-headline {
+    margin: 0;
+    font-family: var(--font-heading);
+    line-height: 1.08;
+  }
+
+  .hero-line {
+    display: block;
+  }
+
+  .hero-line--tense {
+    font-size: clamp(2.25rem, 1.7rem + 2.4vw, 3.75rem);
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: var(--color-graphite);
+  }
+
+  .hero-line--open {
+    margin-top: clamp(0.375rem, 0.2rem + 0.8vw, 1rem);
+    font-size: clamp(2.5rem, 1.85rem + 2.8vw, 4.25rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0;
+    color: var(--color-graphite);
+  }
+
+  .hero-release {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--color-graphite);
+    animation: hero-resolve 600ms var(--ease-standard) 250ms forwards;
+  }
+
+  @keyframes hero-resolve {
+    to {
+      color: var(--color-amber);
+    }
+  }
+
+  .hero-sub {
+    color: var(--color-muted);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+  }
+
+  .hero-meta {
+    margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .hero-meta {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .hero-meta-item .label {
+    margin-bottom: 0.375rem;
+  }
+
+  .hero-meta-value {
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    max-width: 34ch;
+  }
+
+  /* ============ Shared section rhythm ============ */
+  .section {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-narrow {
+    max-width: 56rem;
+  }
+
+  .section :global(.section-heading) {
+    margin-bottom: 2rem;
+  }
+
+  /* ============ Problems ============ */
+  .problem-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .problem-layout {
+      grid-template-columns: 1.6fr 1fr;
+      gap: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .problem-layout {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .problem-text {
+    max-width: 40rem;
+  }
+
+  .problem-image-wrap {
+    justify-self: end;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .problem-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .problem-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    font-size: 1.0625rem;
+    color: var(--color-text);
+  }
+
+  .problem-list li {
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .problem-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+  }
+
+  .problem-close {
+    margin-top: 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  /* ============ Os dois caminhos ============ */
+  .paths-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .paths-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .path-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .path-card--recommended {
+    border-color: var(--color-amber);
+    border-width: 1.5px;
+  }
+
+  .path-badge {
+    align-self: flex-start;
+  }
+
+  .path-body {
+    color: var(--color-muted);
+  }
+
+  .path-link {
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-graphite);
+    transition: gap var(--duration-base) var(--ease-standard);
+  }
+
+  .path-link:hover {
+    gap: 0.625rem;
+    color: var(--color-amber-hover);
+  }
+
+  /* ============ Serviços — índice editorial ============ */
+  .service-index {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-index-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "name arrow" "desc desc";
+    align-items: center;
+    gap: 0.25rem 1rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+    transition: color var(--duration-base) var(--ease-standard);
+  }
+
+  @media (min-width: 768px) {
+    .service-index-row {
+      grid-template-columns: 14rem 1fr auto;
+      grid-template-areas: "name desc arrow";
+    }
+  }
+
+  .service-index-name {
+    grid-area: name;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: var(--color-graphite);
+  }
+
+  .service-index-desc {
+    grid-area: desc;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+  }
+
+  .service-index-row :global(.service-index-arrow) {
+    grid-area: arrow;
+    color: var(--color-graphite);
+    transition: transform var(--duration-base) var(--ease-standard);
+  }
+
+  .service-index-row:hover .service-index-name {
+    color: var(--color-amber-hover);
+  }
+
+  .service-index-row:hover :global(.service-index-arrow) {
+    transform: translateX(4px);
+  }
+
+  /* ============ Pausa editorial — transição ============ */
+  .detail-break {
+    padding-block: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  }
+
+  .detail-image {
+    display: block;
+    width: 100%;
+    max-width: 42rem;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-inline: auto;
+  }
+
+  @media (min-width: 768px) {
+    .detail-image {
+      margin-inline: 0;
+    }
+  }
+
+  /* ============ Como trabalhamos ============ */
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .steps-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .steps-number {
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    font-size: 0.875rem;
+    color: var(--color-amber-hover);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .steps-list strong {
+    font-family: var(--font-heading);
+  }
+
+  /* ============ Porque a SolveIT ============ */
+  .check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .check-list :global(svg) {
+    color: var(--color-amber-hover);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  /* ============ FAQ ============ */
+  .faq-close {
+    margin-top: 1.5rem;
+    color: var(--color-muted);
+  }
+
+  .faq-close-link {
+    color: var(--color-graphite);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .faq-close-link:hover {
+    color: var(--color-amber-hover);
+  }
+
+  /* ============ CTA final ============ */
+  :global(.cta-resolve) {
+    font-style: normal;
+    color: var(--color-amber);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    text-align: left;
+  }
+
+  .contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.125rem;
+  }
+
+  @media (min-width: 640px) {
+    .contact-form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-form :global(.form-label) {
+    color: var(--color-surface);
+  }
+
+  .contact-form :global(.form-hint) {
+    color: color-mix(in srgb, var(--color-surface) 65%, transparent);
+  }
+</style>

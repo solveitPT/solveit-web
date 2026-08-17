@@ -1,0 +1,349 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Icon from "../components/Icon.astro";
+import CtaSection from "../components/CtaSection.astro";
+import FormGroup from "../components/form/FormGroup.astro";
+import Input from "../components/form/Input.astro";
+import Textarea from "../components/form/Textarea.astro";
+import handsImage from "../assets/images/office/hands-laptop-detail.jpg";
+import coffeeImage from "../assets/images/office/two-coffee-cups-desk.jpg";
+
+const principles = [
+  { title: "Falamos de forma clara.", description: "Sem jargão técnico a mais, sem complicar o que é simples." },
+  { title: "Resolvemos remotamente sempre que possível.", description: "É mais rápido para si e reduz o tempo parado." },
+  { title: "Estamos presentes quando é necessário.", description: "Nem tudo se resolve à distância." },
+  { title: "Explicamos antes de complicar.", description: "Percebe sempre o que está a ser feito e porquê." },
+  { title: "Recomendamos o que faz sentido para a sua empresa.", description: "Não o que é mais caro ou mais complexo." },
+];
+---
+
+<BaseLayout
+  title="Sobre a SolveIT"
+  description="Conheça a SolveIT — o parceiro de tecnologia para pequenas e médias empresas que não têm, nem precisam de ter, um departamento de IT interno."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container-content hero-layout">
+      <div class="hero-text">
+        <p class="label">Sobre a SolveIT</p>
+        <h1>A informática devia ajudar a sua empresa a trabalhar melhor — não ser mais uma dor de cabeça.</h1>
+        <p class="hero-sub body-lg">
+          Ajudamos pequenas e médias empresas que não têm — nem precisam de ter — um departamento de IT interno,
+          mas precisam de alguém de confiança a quem recorrer.
+        </p>
+      </div>
+      <div class="hero-image-wrap">
+        <Image
+          src={handsImage}
+          alt="Mãos a trabalhar num portátil numa secretária organizada, à luz natural."
+          class="hero-image"
+          widths={[350, 500, 700]}
+          sizes="(min-width: 1024px) 22rem, (min-width: 768px) 30vw, 100vw"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Porque existimos -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Porque existimos." />
+      <p class="statement-body body-lg">
+        A generalidade das pequenas e médias empresas depende da tecnologia para trabalhar — computadores, email,
+        ficheiros, ligação à internet — mas não tem dimensão nem necessidade para manter um departamento de IT
+        interno. O resultado, muitas vezes, é alguém dentro da empresa a acumular esse papel informalmente, para
+        além das suas funções reais — ou a empresa a lidar com os problemas apenas quando já a estão a atrapalhar.
+        A SolveIT existe para ocupar esse espaço: o de um parceiro de tecnologia acessível, sem ser preciso
+        construir uma equipa própria para isso.
+      </p>
+    </div>
+  </section>
+
+  <!-- O que queremos resolver -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="O que queremos resolver." />
+      <p class="statement-body body-lg">
+        Não queremos ser apenas quem aparece quando um computador avaria. Queremos retirar à sua empresa o peso de
+        ter de perceber, decidir e gerir a parte técnica da tecnologia — para que possa concentrar-se no negócio,
+        não na informática.
+      </p>
+    </div>
+  </section>
+
+  <!-- Como trabalhamos -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Como trabalhamos." />
+      <ul class="check-list">
+        {
+          principles.map((p) => (
+            <li>
+              <Icon name="check" size={18} />
+              <span>
+                <strong>{p.title}</strong> {p.description}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Para quem somos -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Para quem somos." />
+      <p class="statement-body body-lg">
+        Pequenas e médias empresas — sobretudo negócios locais que precisam de um parceiro tecnológico acessível,
+        sem a estrutura (nem o custo) de um departamento de IT interno. Veja em detalhe{" "}
+        <a href="/solucoes#para-quem-faz-sentido" class="inline-link">para quem faz sentido a avença</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Onde estamos -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Onde estamos." />
+      <p class="statement-body body-lg">
+        Suporte remoto em todo o país. Assistência presencial na Grande Lisboa e Margem Sul do Tejo.
+      </p>
+    </div>
+  </section>
+
+  <!-- A nossa ideia de IT -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="A nossa ideia de IT." />
+      <p class="statement-body body-lg">
+        <strong class="text-graphite">We Solve IT</strong> não é só um nome — é como pensamos a tecnologia: a
+        resolver problemas reais, sem complicar o que não precisa de ser complicado. É a mesma ideia por trás de
+        <strong class="text-graphite">“Tenha um departamento de IT. Sem ter de o contratar.”</strong> — ter alguém
+        responsável pela sua informática, sem ter de construir uma equipa própria para isso.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section id="contacto">
+    <CtaSection
+      subheading="Sem compromisso, sem discurso de vendas — só uma conversa para perceber a sua situação."
+      tone="graphite"
+      class="sobre-cta"
+    >
+      <Fragment slot="heading">Conte-nos o que precisa.</Fragment>
+      <div class="cta-with-image">
+        <Image
+          src={coffeeImage}
+          alt="Duas chávenas de café numa secretária de escritório."
+          class="cta-image"
+          widths={[300, 450, 600]}
+          sizes="(min-width: 768px) 18rem, 60vw"
+        />
+        <form class="contact-form" method="post">
+          <div class="contact-form-row">
+            <FormGroup label="Nome" for="ab-name" required>
+              <Input id="ab-name" name="name" required />
+            </FormGroup>
+            <FormGroup label="Empresa" for="ab-company" required>
+              <Input id="ab-company" name="company" required />
+            </FormGroup>
+          </div>
+          <div class="contact-form-row">
+            <FormGroup label="Email" for="ab-email" required>
+              <Input id="ab-email" name="email" type="email" required />
+            </FormGroup>
+            <FormGroup label="Telefone" for="ab-phone">
+              <Input id="ab-phone" name="phone" type="tel" />
+            </FormGroup>
+          </div>
+          <FormGroup label="Mensagem" for="ab-message">
+            <Textarea id="ab-message" name="message" rows={4} />
+          </FormGroup>
+          <Button type="submit" variant="primary">Fale connosco</Button>
+        </form>
+      </div>
+    </CtaSection>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-layout {
+      grid-template-columns: 1.6fr 1fr;
+      gap: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-layout {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    max-width: 40rem;
+  }
+
+  .hero-sub {
+    color: var(--color-muted);
+  }
+
+  .hero-image-wrap {
+    justify-self: end;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .section {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-narrow {
+    max-width: 56rem;
+  }
+
+  .section :global(.section-heading) {
+    margin-bottom: 1.5rem;
+  }
+
+  .statement-body {
+    color: var(--color-muted);
+    max-width: var(--container-prose);
+  }
+
+  .text-graphite {
+    color: var(--color-graphite);
+    font-family: var(--font-heading);
+  }
+
+  .inline-link {
+    color: var(--color-graphite);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .inline-link:hover {
+    color: var(--color-amber-hover);
+  }
+
+  /* Como trabalhamos (check-list) */
+  .check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: var(--container-prose);
+  }
+
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .check-list :global(svg) {
+    color: var(--color-amber-hover);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  .check-list strong {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+  }
+
+  .check-list span {
+    color: var(--color-muted);
+  }
+
+  /* CTA final — imagem + formulário, layout único desta página */
+  :global(.sobre-cta .cta-section-content) {
+    max-width: 56rem;
+  }
+
+  .cta-with-image {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    text-align: left;
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .cta-with-image {
+      grid-template-columns: 18rem 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  .cta-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  @media (max-width: 767px) {
+    .cta-image {
+      max-width: 14rem;
+      margin-inline: auto;
+    }
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    text-align: left;
+  }
+
+  .contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.125rem;
+  }
+
+  @media (min-width: 640px) {
+    .contact-form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-form :global(.form-label) {
+    color: var(--color-surface);
+  }
+
+  .contact-form :global(.form-hint) {
+    color: color-mix(in srgb, var(--color-surface) 65%, transparent);
+  }
+</style>

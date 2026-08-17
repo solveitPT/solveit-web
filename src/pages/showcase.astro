@@ -1,0 +1,462 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Logo from "../components/Logo.astro";
+import Icon, { type IconName } from "../components/Icon.astro";
+import Button from "../components/Button.astro";
+import Card from "../components/Card.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import Badge from "../components/Badge.astro";
+import FaqItem from "../components/FaqItem.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CtaSection from "../components/CtaSection.astro";
+import IconContainer from "../components/IconContainer.astro";
+import FormGroup from "../components/form/FormGroup.astro";
+import Input from "../components/form/Input.astro";
+import Textarea from "../components/form/Textarea.astro";
+
+const colorTokens = [
+  { name: "Graphite", varName: "--color-graphite", hex: "#1E2124", on: "light" },
+  { name: "Secondary", varName: "--color-secondary", hex: "#8C8577", on: "light" },
+  { name: "Amber", varName: "--color-amber", hex: "#D98C2B", on: "light" },
+  { name: "Background", varName: "--color-bg", hex: "#F5F4F2", on: "light" },
+  { name: "Surface", varName: "--color-surface", hex: "#FFFFFF", on: "light" },
+  { name: "Muted text", varName: "--color-muted", hex: "#75726C", on: "light" },
+  { name: "Border", varName: "--color-border", hex: "#E3E1DC", on: "light" },
+  { name: "Error", varName: "--color-error", hex: "#B3261E", on: "light" },
+];
+
+const services: { icon: IconName; title: string; description: string; href: string }[] = [
+  { icon: "support", title: "Suporte IT", description: "Suporte remoto e presencial para o dia a dia da sua equipa.", href: "/servicos/suporte-it" },
+  { icon: "security", title: "Segurança", description: "Proteção de equipamentos e redução do risco de incidentes.", href: "/servicos/seguranca" },
+  { icon: "backup", title: "Backups", description: "Cópias de segurança automáticas e monitorizadas.", href: "/servicos/backups" },
+  { icon: "cloud", title: "Cloud & Microsoft 365", description: "Email empresarial, ficheiros e colaboração, sempre disponíveis.", href: "/servicos/cloud-microsoft-365" },
+  { icon: "network", title: "Redes & Wi-Fi", description: "Ligação estável e segura em todo o escritório.", href: "/servicos/redes-e-wifi" },
+  { icon: "consulting", title: "Consultoria IT", description: "Decisões tecnológicas certas, sem complicar.", href: "/servicos/consultoria-it" },
+];
+
+const faqs = [
+  "Preciso de mudar de fornecedor de informática para experimentar?",
+  "Como funciona a avença mensal?",
+  "Trabalham só remotamente ou também presencialmente?",
+  "E se eu só precisar de ajuda uma vez?",
+  "Quanto tempo demora a primeira resposta?",
+];
+
+const differentiators = [
+  "Falamos a sua língua, não a de informático.",
+  "Prevenção antes do problema — não esperamos que avarie.",
+  "Resposta rápida.",
+];
+
+const icons: IconName[] = [
+  "security",
+  "cloud",
+  "backup",
+  "support",
+  "network",
+  "consulting",
+  "chevron-down",
+  "menu",
+  "close",
+  "arrow-right",
+  "check",
+  "mail",
+  "phone",
+];
+---
+
+<BaseLayout title="Design System" description="Documentação viva do design system da SolveIT — tokens e componentes.">
+  <div class="container-content showcase">
+    <header class="showcase-intro">
+      <p class="label">Documentação interna · não indexar</p>
+      <h1>Design System</h1>
+      <p class="body-lg container-prose">
+        Pré-visualização viva de todos os tokens e componentes aprovados para a SolveIT. Esta página
+        não faz parte do site público — serve para rever consistência antes de construir as páginas
+        reais (Phase 4 em diante). Referência completa em <code>DESIGN_SYSTEM.md</code>.
+      </p>
+    </header>
+
+    <!-- Colors -->
+    <section class="showcase-section" id="cores">
+      <SectionHeading eyebrow="01 · Tokens" heading="Cores" supporting="Paleta 3 — Grafite Confiante. Ver BRAND_IDENTITY.md." />
+      <div class="swatch-grid">
+        {
+          colorTokens.map((c) => (
+            <div class="swatch">
+              <span class="swatch-color" style={`background:${c.hex}`} />
+              <p class="swatch-name">{c.name}</p>
+              <p class="text-small swatch-hex">{c.hex}</p>
+              <p class="text-small swatch-var">var({c.varName})</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-small showcase-note">
+        Nota de acessibilidade: <strong>âmbar nunca é usado como cor de texto</strong> sobre fundos
+        claros (contraste ≈2.7:1, falha AA) — só como preenchimento sólido (com texto grafite por
+        cima), ícone, borda ou elemento grande. Ver secção Acessibilidade.
+      </p>
+    </section>
+
+    <!-- Typography -->
+    <section class="showcase-section" id="tipografia">
+      <SectionHeading eyebrow="02 · Tokens" heading="Tipografia" supporting="Manrope (títulos) + Inter (corpo), self-hosted. Escala fluida via clamp() — sem breakpoints manuais." />
+      <div class="type-specimen">
+        <div class="type-row"><span class="text-small type-row-label">H1</span><h1>Tenha um departamento de IT. Sem ter de o contratar.</h1></div>
+        <div class="type-row"><span class="text-small type-row-label">H2</span><h2>Duas formas de trabalhar com a SolveIT.</h2></div>
+        <div class="type-row"><span class="text-small type-row-label">H3</span><h3>Porque escolher a SolveIT.</h3></div>
+        <div class="type-row"><span class="text-small type-row-label">H4</span><h4>Suporte remoto e presencial.</h4></div>
+        <div class="type-row"><span class="text-small type-row-label">H5</span><h5>Perguntas frequentes</h5></div>
+        <div class="type-row"><span class="text-small type-row-label">H6</span><h6>Serviços</h6></div>
+        <div class="type-row"><span class="text-small type-row-label">Body lg</span><p class="body-lg container-prose">A SolveIT acompanha, mantém e protege a tecnologia da sua empresa como um parceiro externo — para se focar no que importa: o negócio.</p></div>
+        <div class="type-row"><span class="text-small type-row-label">Body</span><p class="container-prose">Suporte remoto e presencial para o dia a dia da sua equipa, com um plano de manutenção contínua para deixar de ter surpresas.</p></div>
+        <div class="type-row"><span class="text-small type-row-label">Small</span><p class="text-small">Suporte remoto em todo o país · Assistência presencial na Grande Lisboa e Margem Sul do Tejo.</p></div>
+        <div class="type-row"><span class="text-small type-row-label">Label</span><p class="label">Perguntas frequentes</p></div>
+      </div>
+    </section>
+
+    <!-- Logo -->
+    <section class="showcase-section" id="logo">
+      <SectionHeading eyebrow="03 · Marca" heading="Logótipo" supporting="Geometria final aprovada — não alterar. Ver SYMBOL_EXPLORATION.md." />
+      <div class="logo-specimen-grid">
+        <div class="logo-specimen">
+          <Logo size={32} />
+          <p class="text-small">Completo · cor</p>
+        </div>
+        <div class="logo-specimen logo-specimen--dark">
+          <Logo size={32} theme="mono" wordmark="mono" class="logo-on-dark" />
+          <p class="text-small">Completo · mono sobre escuro</p>
+        </div>
+        <div class="logo-specimen">
+          <Logo size={40} variant="mark" />
+          <p class="text-small">Símbolo isolado</p>
+        </div>
+        <div class="logo-specimen logo-specimen--dark">
+          <Logo size={40} variant="mark" theme="mono" class="logo-on-dark" />
+          <p class="text-small">Símbolo · mono sobre escuro</p>
+        </div>
+        <div class="logo-specimen">
+          <Logo size={16} variant="mark" />
+          <p class="text-small">16px · favicon</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Icons -->
+    <section class="showcase-section" id="icones">
+      <SectionHeading eyebrow="04 · Marca" heading="Iconografia" supporting="Line icons, grelha 24px, traço 1.6px, sem clichés de TI (sem cadeado/escudo para segurança)." />
+      <div class="icon-grid">
+        {
+          icons.map((name) => (
+            <div class="icon-specimen">
+              <Icon name={name} size={22} />
+              <p class="text-small">{name}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-small showcase-note">Icon containers — usados nos cards de serviço para dar peso visual ao ícone:</p>
+      <div class="component-row">
+        <IconContainer tone="graphite"><Icon name="security" size={22} /></IconContainer>
+        <IconContainer tone="amber"><Icon name="backup" size={22} /></IconContainer>
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <section class="showcase-section" id="botoes">
+      <SectionHeading eyebrow="05 · Componentes" heading="Botões" supporting="Primário em âmbar (texto grafite, ~5.9:1 de contraste). Secundário em contorno grafite. Ghost para ações terciárias." />
+      <div class="component-row">
+        <Button variant="primary">Marcar uma conversa</Button>
+        <Button variant="secondary">Ver como funciona a avença</Button>
+        <Button variant="ghost">Saber mais</Button>
+      </div>
+      <div class="component-row">
+        <Button variant="primary" size="sm">Fale connosco</Button>
+        <Button variant="secondary" size="sm">Ver serviços</Button>
+        <Button variant="primary" disabled>Indisponível</Button>
+      </div>
+      <p class="text-small showcase-note">Estados hover / focus / active são interativos — passa o rato ou navega com Tab para os ver.</p>
+    </section>
+
+    <!-- Cards -->
+    <section class="showcase-section" id="cards">
+      <SectionHeading eyebrow="06 · Componentes" heading="Cards de serviço" supporting="Copy aprovada em HOMEPAGE_STRATEGY.md — as 6 páginas-pilar de serviço." />
+      <div class="service-grid">
+        {services.map((s) => <ServiceCard {...s} />)}
+      </div>
+    </section>
+
+    <!-- Badges -->
+    <section class="showcase-section" id="badges">
+      <SectionHeading eyebrow="07 · Componentes" heading="Badges" supporting="Usado, por exemplo, para destacar a avença como opção recomendada em 'Os dois caminhos'." />
+      <div class="component-row">
+        <Badge tone="amber">Recomendado</Badge>
+        <Badge tone="graphite">Em breve</Badge>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="showcase-section" id="faq">
+      <SectionHeading eyebrow="08 · Componentes" heading="FAQ" supporting="Accordion nativo (details/summary) — zero JavaScript, teclado e leitor de ecrã tratados pelo browser." />
+      <div class="faq-list container-prose">
+        {
+          faqs.map((q) => (
+            <FaqItem question={q}>
+              <p>[Conteúdo a confirmar — resposta final entra na Phase 6, Lead Generation.]</p>
+            </FaqItem>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Checklist / icon list -->
+    <section class="showcase-section" id="lista">
+      <SectionHeading eyebrow="09 · Componentes" heading="Lista com ícone" supporting="Diferenciadores da secção 'Porque a SolveIT' — itens marcados [placeholder] aguardam confirmação do cliente." />
+      <ul class="check-list container-prose">
+        {
+          differentiators.map((d) => (
+            <li>
+              <Icon name="check" size={18} />
+              <span>{d}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- Forms -->
+    <section class="showcase-section" id="formulario">
+      <SectionHeading eyebrow="10 · Componentes" heading="Formulário" supporting="Input, Textarea e FormGroup — estados default, focus e erro." />
+      <form class="form-specimen container-prose" onsubmit="return false">
+        <FormGroup label="Nome" for="demo-name" required>
+          <Input id="demo-name" name="name" required />
+        </FormGroup>
+        <FormGroup label="Email" for="demo-email" required error="Introduza um email válido.">
+          <Input id="demo-email" name="email" type="email" invalid aria-describedby="demo-email-error" required />
+        </FormGroup>
+        <FormGroup label="Mensagem" for="demo-message" hint="Conte-nos brevemente o que se passa.">
+          <Textarea id="demo-message" name="message" aria-describedby="demo-message-hint" />
+        </FormGroup>
+        <Button type="submit" variant="primary">Fale connosco</Button>
+      </form>
+    </section>
+
+    <!-- Section heading demo -->
+    <section class="showcase-section" id="section-heading">
+      <SectionHeading eyebrow="11 · Componentes" heading="Section heading" supporting="Bloco de título reutilizável entre secções — alinhamento esquerda ou centro." />
+      <Card>
+        <SectionHeading align="center" eyebrow="Modelo de parceria" heading="Duas formas de trabalhar com a SolveIT." supporting="Tem um problema concreto? Resolvemos pontualmente, sem compromisso — ou torne-se avença e deixe de se preocupar com isto." />
+      </Card>
+    </section>
+  </div>
+
+  <!-- CTA section -->
+  <section id="cta">
+    <CtaSection
+      heading="Vamos resolver a sua informática."
+      subheading="Marque uma conversa sem compromisso — remoto em todo o país, presencial na Grande Lisboa e Margem Sul do Tejo."
+      primaryLabel="Fale connosco"
+      primaryHref="/contactos"
+      secondaryLabel="Ver como funciona a avença"
+      secondaryHref="/solucoes"
+    />
+  </section>
+
+  <div class="container-content">
+    <section class="showcase-section" id="acessibilidade">
+      <SectionHeading eyebrow="12 · Diretrizes" heading="Acessibilidade" />
+      <ul class="check-list container-prose">
+        <li><Icon name="check" size={18} /><span>Contraste: todas as combinações de texto verificadas a ≥4.5:1 (AA); âmbar nunca usado como cor de texto sobre fundo claro.</span></li>
+        <li><Icon name="check" size={18} /><span>Focus visível: anel grafite sobre fundos claros, anel âmbar sobre fundos escuros (<code>.surface-dark</code>) — ambos cumprem 3:1 de contraste mínimo para indicadores de foco.</span></li>
+        <li><Icon name="check" size={18} /><span>Navegação por teclado: menu mobile e FAQ operáveis sem rato; <code>:focus-visible</code> nunca removido.</span></li>
+        <li><Icon name="check" size={18} /><span><code>prefers-reduced-motion</code> respeitado globalmente — todas as transições/animações são anuladas.</span></li>
+        <li><Icon name="check" size={18} /><span>HTML semântico: <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;details&gt;</code> nativos em vez de <code>&lt;div&gt;</code> com JavaScript.</span></li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .showcase {
+    padding-block: 3rem;
+  }
+
+  .showcase-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 3rem;
+  }
+
+  .showcase-intro code,
+  .type-row code,
+  .showcase-note code,
+  .check-list code {
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 0.875em;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.05em 0.4em;
+  }
+
+  .showcase-section {
+    padding-block: 3rem;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .showcase-note {
+    color: var(--color-muted);
+    max-width: 65ch;
+  }
+
+  /* Colors */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .swatch-color {
+    display: block;
+    height: 4.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    margin-bottom: 0.625rem;
+  }
+
+  .swatch-name {
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+
+  .swatch-hex,
+  .swatch-var {
+    color: var(--color-muted);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  }
+
+  /* Typography */
+  .type-specimen {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .type-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1.25rem;
+    align-items: baseline;
+    padding-block: 0.75rem;
+    border-bottom: 1px dashed var(--color-border);
+  }
+
+  .type-row-label {
+    color: var(--color-muted);
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  }
+
+  /* Logo */
+  .logo-specimen-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+
+  .logo-specimen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    min-width: 10rem;
+  }
+
+  .logo-specimen--dark {
+    background: var(--color-graphite);
+    color: var(--color-surface);
+  }
+
+  .logo-specimen :global(.logo-on-dark) {
+    color: var(--color-surface);
+  }
+
+  /* Icons */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: 1rem;
+  }
+
+  .icon-specimen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.25rem 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-graphite);
+  }
+
+  .icon-specimen p {
+    color: var(--color-muted);
+    text-align: center;
+  }
+
+  /* Generic rows */
+  .component-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .check-list :global(svg) {
+    color: var(--color-amber-hover);
+    margin-top: 0.15rem;
+    flex-shrink: 0;
+  }
+
+  .form-specimen {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+</style>

@@ -1,0 +1,189 @@
+---
+import Logo from "./Logo.astro";
+import Button from "./Button.astro";
+import Icon from "./Icon.astro";
+
+const navItems = [
+  { label: "Serviços", href: "/servicos" },
+  { label: "Soluções", href: "/solucoes" },
+  { label: "Sobre", href: "/sobre" },
+  { label: "Contactos", href: "/contactos" },
+];
+---
+
+<header class="site-header">
+  <div class="container-content site-header-inner">
+    <a href="/" class="site-header-logo" aria-label="SolveIT — página inicial">
+      <Logo />
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
+      <ul class="site-nav-list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href} class="site-nav-link">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header-actions">
+      <Button href="/contactos" variant="primary" size="sm" class="site-header-cta">
+        Fale connosco
+      </Button>
+      <button
+        type="button"
+        class="site-header-toggle"
+        aria-expanded="false"
+        aria-controls="site-nav"
+        data-nav-toggle
+      >
+        <span class="sr-only">Abrir menu</span>
+        <Icon name="menu" size={24} class="icon-open" />
+        <Icon name="close" size={24} class="icon-close" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.875rem;
+  }
+
+  .site-nav-list {
+    display: none;
+  }
+
+  .site-nav-link {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color var(--duration-base) var(--ease-standard);
+  }
+
+  .site-nav-link:hover {
+    color: var(--color-amber-hover);
+  }
+
+  .site-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .site-header-cta {
+    display: none;
+  }
+
+  .site-header-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-graphite);
+  }
+
+  .site-header-toggle .icon-close {
+    display: none;
+  }
+
+  .site-header-toggle[aria-expanded="true"] .icon-open {
+    display: none;
+  }
+
+  .site-header-toggle[aria-expanded="true"] .icon-close {
+    display: block;
+  }
+
+  /* Mobile nav panel — shown when toggle is expanded */
+  @media (max-width: 767px) {
+    .site-nav {
+      position: absolute;
+      inset-inline: 0;
+      top: 100%;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--duration-slow) var(--ease-standard);
+    }
+
+    .site-nav.is-open {
+      max-height: 24rem;
+    }
+
+    .site-nav-list {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem 1.25rem 1.5rem;
+    }
+
+    .site-nav-link {
+      display: block;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .site-nav-list {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .site-header-cta {
+      display: inline-flex;
+    }
+
+    .site-header-toggle {
+      display: none;
+    }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+  const nav = document.getElementById("site-nav");
+
+  toggle?.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    nav?.classList.toggle("is-open", !expanded);
+  });
+</script>

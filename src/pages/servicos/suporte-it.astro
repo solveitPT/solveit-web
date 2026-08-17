@@ -1,0 +1,598 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/Button.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import Icon from "../../components/Icon.astro";
+import FaqItem from "../../components/FaqItem.astro";
+import CtaSection from "../../components/CtaSection.astro";
+import FormGroup from "../../components/form/FormGroup.astro";
+import Input from "../../components/form/Input.astro";
+import Textarea from "../../components/form/Textarea.astro";
+import printerImage from "../../assets/images/office/office-printer-daylight.jpg";
+import cableImage from "../../assets/images/services/cable-connection-detail.jpg";
+
+const problems = [
+  "O computador está lento e ninguém sabe bem porquê.",
+  "O email deixou de sincronizar e ninguém mexeu em nada.",
+  "A impressora da equipa simplesmente não liga.",
+  "Chegou um computador novo e precisa de ficar pronto a usar.",
+  "O Wi-Fi falha exatamente quando é preciso apresentar algo a um cliente.",
+];
+
+const scopeGroups = [
+  {
+    title: "Equipamento e sistema",
+    description:
+      "Computadores lentos ou com problemas, instalação e configuração de equipamento novo, Windows e atualizações, periféricos (ratos, teclados, webcams, docks). Inclui transferência de dados quando faz parte de uma intervenção simples ou configuração de equipamento.",
+  },
+  {
+    title: "Software e comunicação",
+    description:
+      "Instalação e configuração do software que a sua equipa usa no dia a dia (por exemplo Windows, Microsoft 365 ou Outlook, entre outros), e aconselhamento simples sobre compra ou configuração de equipamento e software.",
+  },
+  {
+    title: "Acesso e rede do dia a dia",
+    description: null, // rendered manually below (contains an internal link)
+  },
+  {
+    title: "Equipamento de escritório",
+    description: "Impressoras, scanners e outro hardware partilhado.",
+  },
+];
+
+const steps = [
+  { title: "Contacta-nos", description: "Descreva o que se passa, por telefone, email ou formulário." },
+  { title: "Percebemos o problema", description: "Avaliamos, sempre que possível à distância, e explicamos-lhe o que está a acontecer." },
+  { title: "Resolvemos, ou encaminhamos", description: "Se estiver dentro do nosso âmbito, tratamos logo; se exigir uma intervenção mais especializada, identificamos o que é necessário e ajudamos a coordenar." },
+  { title: "Confirmamos consigo", description: "Só damos o pedido como concluído quando o problema estiver mesmo resolvido." },
+];
+
+const expectations = [
+  "Comunicação clara, sem jargão técnico.",
+  "Resolução remota sempre que possível — mais rápido para si.",
+  "Presença física quando é mesmo necessária, na Grande Lisboa e Margem Sul do Tejo.",
+  "Resposta rápida.",
+];
+
+const faqs = [
+  {
+    question: "Que tipo de problemas informáticos resolvem?",
+    answer:
+      "Tratamos dos problemas do dia a dia da sua equipa — computadores lentos ou com erros, instalação e configuração de equipamento, Windows, Microsoft 365 e Outlook, impressoras, acessos e Wi-Fi. Para trabalhos de rede mais estruturais (routers, switches, cobertura Wi-Fi) ou decisões tecnológicas mais amplas, temos serviços dedicados — Redes & Wi-Fi e Consultoria IT.",
+  },
+  {
+    question: "O suporte é sempre remoto, ou também vêm ao meu escritório?",
+    answer:
+      "As duas coisas. Resolvemos remotamente sempre que possível, porque costuma ser mais rápido — e vamos ao seu escritório quando é mesmo necessário, na Grande Lisboa e Margem Sul do Tejo.",
+  },
+  {
+    question: "Preciso de assinar um contrato para pedir ajuda uma vez?",
+    answer:
+      "Não. Pode pedir ajuda pontual sem compromisso continuado — é exatamente para isso que essa opção existe. Se fizer mais sentido para o seu caso, também pode optar por uma avença mensal, com acompanhamento contínuo em vez de pedidos isolados.",
+  },
+  {
+    question: "Trabalham com que sistemas operativos e programas?",
+    answer:
+      "Trabalhamos sobretudo, e preferencialmente, com Windows, Microsoft 365 e Outlook — são as tecnologias mais comuns nas PME portuguesas e onde temos mais experiência. Fora deste ecossistema, avaliamos caso a caso se conseguimos apoiar.",
+  },
+  {
+    question: "O que acontece se o problema não puder ser resolvido à distância?",
+    answer:
+      "Se não for possível resolver remotamente, deslocamo-nos ao seu escritório, dentro da área de atuação presencial (Grande Lisboa e Margem Sul do Tejo). Fora dessa área, avaliamos caso a caso — se a deslocação se justificar, não está excluída.",
+  },
+];
+---
+
+<BaseLayout
+  title="Suporte Informático para Empresas"
+  description="Suporte técnico para os problemas do dia a dia da sua empresa — computadores, email, impressoras, rede. Remoto em todo o país, presencial na Grande Lisboa e Margem Sul do Tejo."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container-content hero-inner">
+      <a href="/servicos" class="breadcrumb">Serviços</a>
+      <h1>Quando a informática do dia a dia deixa de funcionar como devia, sabe quem contactar.</h1>
+      <p class="hero-sub body-lg container-prose">
+        Suporte técnico para os problemas reais do dia a dia da sua empresa — computadores, email, impressoras,
+        rede. Remoto em todo o país, presencial na Grande Lisboa e Margem Sul do Tejo.
+      </p>
+      <div class="hero-actions">
+        <Button href="#contacto" variant="primary">Marcar uma conversa</Button>
+        <Button href="#o-que-tratamos" variant="secondary">Ver o que tratamos</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problemas que reconhece -->
+  <section class="section">
+    <div class="container-content problem-layout">
+      <div class="problem-text">
+        <SectionHeading heading="Os pequenos problemas que atrasam o seu dia." />
+        <ul class="problem-list">
+          {problems.map((p) => <li>{p}</li>)}
+        </ul>
+        <p class="problem-close">É para isto que a SolveIT existe.</p>
+      </div>
+      <div class="problem-image-wrap">
+        <Image
+          src={printerImage}
+          alt="Impressora de escritório numa prateleira de madeira, à luz natural."
+          class="problem-image"
+          widths={[350, 500, 700]}
+          sizes="(min-width: 1024px) 22rem, (min-width: 768px) 30vw, 100vw"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- O que tratamos -->
+  <section class="section" id="o-que-tratamos">
+    <div class="container-content">
+      <SectionHeading heading="O que tratamos." />
+      <div class="scope-grid">
+        {
+          scopeGroups.map((g) => (
+            <div class="scope-group">
+              <h3>{g.title}</h3>
+              {g.title === "Acesso e rede do dia a dia" ? (
+                <p>
+                  Configuração de utilizadores, acessos e permissões do dia a dia, ligação, e problemas simples de
+                  Wi-Fi. Para instalação, configuração e desenho de infraestrutura de rede, ver{" "}
+                  <a href="/servicos/redes-e-wifi">Redes &amp; Wi-Fi</a>.
+                </p>
+              ) : (
+                <p>{g.description}</p>
+              )}
+            </div>
+          ))
+        }
+      </div>
+      <p class="scope-note">
+        Nem tudo cabe num único serviço. Software sem licença não é suportado; equipamento já sem suporte do
+        fabricante pode precisar de ser substituído; e trabalhos mais especializados, ou recuperação e migração de
+        dados mais complexas, são avaliados — e orçamentados, quando aplicável — caso a caso.
+      </p>
+      <p class="scope-close">Remoto em todo o país. Presencial na Grande Lisboa e Margem Sul do Tejo.</p>
+    </div>
+  </section>
+
+  <!-- Pausa editorial -->
+  <section class="section detail-break">
+    <div class="container-content">
+      <Image
+        src={cableImage}
+        alt="Mão a ligar um cabo a um portátil, numa secretária de madeira."
+        class="detail-image"
+        widths={[500, 900, 1200]}
+        sizes="(min-width: 768px) 50vw, 90vw"
+      />
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Como funciona." />
+      <ol class="steps-list">
+        {
+          steps.map((s, i) => (
+            <li>
+              <span class="steps-number">{String(i + 1).padStart(2, "0")}</span>
+              <span>
+                <strong>{s.title}</strong> — {s.description}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Suporte pontual ou avença -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Suporte pontual ou avença." />
+      <div class="modes-grid">
+        <div class="mode-block">
+          <h3>Pontual</h3>
+          <p>Para resolver uma necessidade concreta, sem compromisso continuado.</p>
+        </div>
+        <div class="mode-block">
+          <h3>Avença</h3>
+          <p>Para empresas que preferem ter alguém responsável pela sua informática todos os meses, com prevenção incluída.</p>
+        </div>
+      </div>
+      <a href="/solucoes" class="mode-link">
+        Conhecer a avença
+        <Icon name="arrow-right" size={16} />
+      </a>
+    </div>
+  </section>
+
+  <!-- O que pode esperar da SolveIT -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="O que pode esperar da SolveIT." />
+      <ul class="check-list">
+        {
+          expectations.map((e) => (
+            <li>
+              <Icon name="check" size={18} />
+              <span>{e}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Perguntas frequentes." />
+      <div class="faq-list">
+        {
+          faqs.map((f) => (
+            <FaqItem question={f.question}>
+              <p>{f.answer}</p>
+            </FaqItem>
+          ))
+        }
+      </div>
+      <p class="faq-close">
+        Ainda tem dúvidas? <a href="#contacto" class="faq-close-link">Fale connosco</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section id="contacto">
+    <CtaSection subheading="Descreva o que se passa — remoto em todo o país, presencial na Grande Lisboa e Margem Sul do Tejo." tone="graphite">
+      <Fragment slot="heading">Vamos tratar disso.</Fragment>
+      <form class="contact-form" method="post">
+        <div class="contact-form-row">
+          <FormGroup label="Nome" for="s-name" required>
+            <Input id="s-name" name="name" required />
+          </FormGroup>
+          <FormGroup label="Empresa" for="s-company" required>
+            <Input id="s-company" name="company" required />
+          </FormGroup>
+        </div>
+        <div class="contact-form-row">
+          <FormGroup label="Email" for="s-email" required>
+            <Input id="s-email" name="email" type="email" required />
+          </FormGroup>
+          <FormGroup label="Telefone" for="s-phone">
+            <Input id="s-phone" name="phone" type="tel" />
+          </FormGroup>
+        </div>
+        <FormGroup label="Mensagem" for="s-message">
+          <Textarea id="s-message" name="message" rows={4} />
+        </FormGroup>
+        <Button type="submit" variant="primary">Fale connosco</Button>
+      </form>
+    </CtaSection>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ============ Hero ============ */
+  .hero {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem) clamp(2.5rem, 2rem + 2vw, 4rem);
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .breadcrumb {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .breadcrumb:hover {
+    color: var(--color-amber-hover);
+  }
+
+  .hero h1 {
+    max-width: 26ch;
+  }
+
+  .hero-sub {
+    color: var(--color-muted);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-top: 0.5rem;
+  }
+
+  /* ============ Shared section rhythm ============ */
+  .section {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-narrow {
+    max-width: 56rem;
+  }
+
+  .section :global(.section-heading) {
+    margin-bottom: 2rem;
+  }
+
+  /* ============ Problems (+ image) ============ */
+  .problem-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .problem-layout {
+      grid-template-columns: 1.6fr 1fr;
+      gap: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .problem-layout {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .problem-text {
+    max-width: 40rem;
+  }
+
+  .problem-image-wrap {
+    justify-self: end;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .problem-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .problem-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    font-size: 1.0625rem;
+    color: var(--color-text);
+  }
+
+  .problem-list li {
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .problem-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+  }
+
+  .problem-close {
+    margin-top: 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  /* ============ O que tratamos ============ */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .scope-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem 2rem;
+    }
+  }
+
+  .scope-group h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .scope-group p {
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+  }
+
+  .scope-group p :global(a) {
+    color: var(--color-graphite);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .scope-group p :global(a:hover) {
+    color: var(--color-amber-hover);
+  }
+
+  .scope-note {
+    max-width: var(--container-prose);
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--color-border);
+  }
+
+  .scope-close {
+    margin-top: 1.25rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  /* ============ Pausa editorial ============ */
+  .detail-break {
+    padding-block: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+  }
+
+  .detail-image {
+    display: block;
+    width: 100%;
+    max-width: 42rem;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-inline: auto;
+  }
+
+  @media (min-width: 768px) {
+    .detail-image {
+      margin-inline: 0;
+    }
+  }
+
+  /* ============ Como funciona ============ */
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .steps-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .steps-number {
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    font-size: 0.875rem;
+    color: var(--color-amber-hover);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .steps-list strong {
+    font-family: var(--font-heading);
+  }
+
+  /* ============ Suporte pontual ou avença ============ */
+  .modes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .modes-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  .mode-block h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .mode-block p {
+    color: var(--color-muted);
+  }
+
+  .mode-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-graphite);
+    transition: gap var(--duration-base) var(--ease-standard);
+  }
+
+  .mode-link:hover {
+    gap: 0.625rem;
+    color: var(--color-amber-hover);
+  }
+
+  /* ============ Porque a SolveIT (check-list) ============ */
+  .check-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .check-list :global(svg) {
+    color: var(--color-amber-hover);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  /* ============ FAQ ============ */
+  .faq-close {
+    margin-top: 1.5rem;
+    color: var(--color-muted);
+  }
+
+  .faq-close-link {
+    color: var(--color-graphite);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .faq-close-link:hover {
+    color: var(--color-amber-hover);
+  }
+
+  /* ============ CTA final ============ */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    text-align: left;
+  }
+
+  .contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.125rem;
+  }
+
+  @media (min-width: 640px) {
+    .contact-form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-form :global(.form-label) {
+    color: var(--color-surface);
+  }
+
+  .contact-form :global(.form-hint) {
+    color: color-mix(in srgb, var(--color-surface) 65%, transparent);
+  }
+</style>

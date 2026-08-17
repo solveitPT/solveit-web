@@ -1,0 +1,118 @@
+---
+import Button from "./Button.astro";
+
+interface Props {
+  heading?: string;
+  subheading?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  tone?: "graphite" | "surface";
+  class?: string;
+}
+
+const {
+  heading,
+  subheading,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+  tone = "graphite",
+  class: className,
+} = Astro.props;
+
+const hasContent = Astro.slots.has("default");
+---
+
+<section
+  class:list={["cta-section", `cta-section--${tone}`, { "surface-dark": tone === "graphite" }, className]}
+>
+  <div class:list={["container-content cta-section-inner", { "cta-section-inner--content": hasContent }]}>
+    <h2><slot name="heading">{heading}</slot></h2>
+    {subheading && <p class="cta-section-sub">{subheading}</p>}
+    {
+      hasContent ? (
+        <div class="cta-section-content">
+          <slot />
+        </div>
+      ) : (
+        primaryLabel &&
+        primaryHref && (
+          <div class="cta-section-actions">
+            <Button href={primaryHref} variant="primary">
+              {primaryLabel}
+            </Button>
+            {secondaryLabel && secondaryHref && (
+              <Button href={secondaryHref} variant="secondary">
+                {secondaryLabel}
+              </Button>
+            )}
+          </div>
+        )
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding-block: clamp(3rem, 2rem + 4vw, 5.5rem);
+  }
+
+  .cta-section--graphite {
+    background: var(--color-graphite);
+    color: var(--color-surface);
+  }
+
+  .cta-section--surface {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .cta-section-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
+
+  .cta-section-sub {
+    max-width: 56ch;
+    font-size: 1.0625rem;
+    opacity: 0.85;
+  }
+
+  .cta-section-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.875rem;
+    margin-top: 0.5rem;
+  }
+
+  .cta-section-inner--content {
+    align-items: stretch;
+  }
+
+  .cta-section-content {
+    width: 100%;
+    max-width: 34rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Secondary button needs a light outline when placed on the dark graphite tone */
+  .cta-section--graphite :global(.btn--secondary) {
+    border-color: var(--color-surface);
+    color: var(--color-surface);
+  }
+
+  .cta-section--graphite :global(.btn--secondary:hover) {
+    background: var(--color-surface);
+    color: var(--color-graphite);
+  }
+</style>

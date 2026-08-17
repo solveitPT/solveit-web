@@ -1,0 +1,56 @@
+---
+interface Props {
+  label: string;
+  for: string;
+  hint?: string;
+  error?: string;
+  required?: boolean;
+  class?: string;
+}
+
+const { label, for: forId, hint, error, required = false, class: className } = Astro.props;
+const describedBy = error ? `${forId}-error` : hint ? `${forId}-hint` : undefined;
+---
+
+<div class:list={["form-group", className]}>
+  <label class="form-label" for={forId}>
+    {label}
+    {required && <span class="form-required" aria-hidden="true">*</span>}
+  </label>
+  <div data-field-slot data-describedby={describedBy}>
+    <slot />
+  </div>
+  {hint && !error && <p id={`${forId}-hint`} class="form-hint">{hint}</p>}
+  {error && <p id={`${forId}-error`} class="form-error" role="alert">{error}</p>}
+</div>
+
+<style>
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-graphite);
+  }
+
+  .form-required {
+    color: var(--color-error);
+    margin-left: 0.125rem;
+  }
+
+  .form-hint {
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+  }
+
+  .form-error {
+    font-size: 0.8125rem;
+    color: var(--color-error);
+    font-weight: 500;
+  }
+</style>

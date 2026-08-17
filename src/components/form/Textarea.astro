@@ -1,0 +1,40 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  placeholder?: string;
+  rows?: number;
+  required?: boolean;
+  invalid?: boolean;
+  "aria-describedby"?: string;
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  placeholder,
+  rows = 5,
+  required = false,
+  invalid = false,
+  "aria-describedby": describedBy,
+  class: className,
+} = Astro.props;
+---
+
+<textarea
+  class:list={["field", { "field--invalid": invalid }, className]}
+  id={id}
+  name={name}
+  placeholder={placeholder}
+  rows={rows}
+  required={required}
+  aria-invalid={invalid ? "true" : undefined}
+  aria-describedby={describedBy}></textarea>
+
+<style>
+  textarea.field {
+    resize: vertical;
+    min-height: 6rem;
+  }
+</style>

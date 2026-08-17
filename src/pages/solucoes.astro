@@ -1,0 +1,534 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Icon, { type IconName } from "../components/Icon.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import FaqItem from "../components/FaqItem.astro";
+import CtaSection from "../components/CtaSection.astro";
+import FormGroup from "../components/form/FormGroup.astro";
+import Input from "../components/form/Input.astro";
+import Textarea from "../components/form/Textarea.astro";
+import deskImage from "../assets/images/office/organized-sme-desk.jpg";
+
+const patterns = [
+  "Só se lembra da informática quando alguma coisa para de funcionar.",
+  "Cada vez que há um problema, é preciso voltar a explicar tudo a quem vai ajudar.",
+  "Nunca sabe se o que está instalado hoje ainda faz sentido daqui a um ano.",
+  "As decisões de tecnologia vão sendo adiadas, até deixarem de ser possíveis de adiar.",
+];
+
+const transforms = [
+  { before: "Reativo", after: "Preventivo" },
+  { before: "Incerto", after: "Mais previsível" },
+  { before: "“Quem trato disto?”", after: "“Tenho um parceiro responsável pela minha IT”" },
+  { before: "Resolver problemas", after: "Acompanhar, manter e melhorar" },
+];
+
+const steps = [
+  { title: "Conhecemos a empresa", description: "Conversamos sobre como trabalha e o que já tem." },
+  { title: "Avaliamos o ambiente", description: "O estado atual da sua informática." },
+  { title: "Definimos prioridades", description: "O que faz mais sentido tratar primeiro." },
+  { title: "Começamos o acompanhamento", description: "A avença arranca." },
+  { title: "Mantemos e melhoramos", description: "De forma contínua, não só quando há problemas." },
+];
+
+const included: { icon: IconName; title: string; description: string; href: string }[] = [
+  { icon: "support", title: "Suporte", description: "Alguém responsável pela sua informática no dia a dia, com prevenção incluída.", href: "/servicos/suporte-it" },
+  { icon: "security", title: "Segurança", description: "Gestão contínua de segurança, para reduzir o risco de forma constante.", href: "/servicos/seguranca" },
+  { icon: "backup", title: "Backups", description: "Backup, monitorização e verificação contínuos.", href: "/servicos/backups" },
+  { icon: "cloud", title: "Cloud & Microsoft 365", description: "Gestão contínua do email, ficheiros e colaboração, quando aplicável.", href: "/servicos/cloud-microsoft-365" },
+  { icon: "network", title: "Redes & Wi-Fi", description: "Manutenção e acompanhamento contínuo da rede.", href: "/servicos/redes-e-wifi" },
+  { icon: "consulting", title: "Consultoria IT", description: "Decisões tecnológicas acompanhadas antes de se tornarem urgentes.", href: "/servicos/consultoria-it" },
+];
+
+const fits = [
+  "Empresas sem departamento de IT interno.",
+  "Empresas com alguém “que percebe de computadores”, mas que não devia ter de tratar disto sozinho.",
+  "Empresas a crescer, cuja informática precisa de acompanhar esse crescimento.",
+  "Empresas que dependem fortemente de Microsoft 365, computadores ou internet para trabalhar.",
+  "Empresas que querem parar de reagir constantemente a problemas.",
+];
+
+const faqs = [
+  { question: "Quanto custa a avença?", answer: "Depende do que a sua empresa precisa — não temos um preço único para todas as empresas. Marcamos uma conversa para perceber a sua situação e apresentar uma proposta ajustada." },
+  { question: "O que está incluído na avença?", answer: "Varia consoante a sua empresa — pode incluir suporte, segurança, backups, Microsoft 365, redes e consultoria, isolados ou em conjunto. Definimos isso juntos, não é um pacote fixo igual para todos." },
+  { question: "Há um número mínimo ou máximo de pedidos de suporte incluídos?", answer: "A avença é dimensionada de acordo com a sua empresa e as suas necessidades — não trabalhamos com um número fixo aplicado a todas as empresas. Definimos isso consigo antes de começar." },
+  { question: "Qual é a duração mínima do contrato?", answer: "As condições contratuais são definidas caso a caso, consoante o acompanhamento acordado — podemos falar sobre isso na proposta." },
+  { question: "Posso mudar de avença para pontual, ou vice-versa, mais tarde?", answer: "Sim — a relação evolui consoante a sua empresa. Se preferir mudar de modelo, falamos sobre isso quando fizer sentido." },
+  { question: "Se já tenho alguém a tratar de parte da informática, a avença serve na mesma?", answer: "Sim — a avença pode complementar quem já tem, cobrindo só as áreas que fizerem sentido." },
+];
+---
+
+<BaseLayout
+  title="Avença de IT para Empresas"
+  description="Tenha um departamento de IT sem o contratar — acompanhamento contínuo da sua informática, com suporte, segurança, backups e mais, consoante o que a sua empresa precisa."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container-content hero-layout">
+      <div class="hero-text">
+        <h1>Tenha um departamento de IT. Sem ter de o contratar.</h1>
+        <p class="hero-sub body-lg">
+          A avença é o nosso modelo de acompanhamento contínuo — a sua empresa passa a ter um parceiro responsável
+          pela informática no dia a dia, não apenas alguém que aparece quando algo avaria.
+        </p>
+        <div class="hero-actions">
+          <Button href="#contacto" variant="primary">Marcar uma conversa</Button>
+          <Button href="#o-que-inclui" variant="secondary">Ver o que está incluído</Button>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <Image
+          src={deskImage}
+          alt="Secretária de escritório organizada, com portátil, caderno e uma planta, à luz natural."
+          class="hero-image"
+          widths={[350, 500, 700]}
+          sizes="(min-width: 1024px) 22rem, (min-width: 768px) 30vw, 100vw"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Reconhece este padrão? -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Reconhece este padrão?" />
+      <ul class="problem-list">
+        {patterns.map((p) => <li>{p}</li>)}
+      </ul>
+      <p class="problem-close">
+        Nada disto é errado — é só reativo. A avença propõe o oposto: acompanhamento antes do problema, não só
+        depois.
+      </p>
+    </div>
+  </section>
+
+  <!-- O que é a avença -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="O que é a avença." />
+      <p class="statement-body body-lg">
+        A avença é um acompanhamento mensal da informática da sua empresa — não um pacote fixo de tarefas, mas uma
+        relação contínua: conhecemos a sua empresa, cuidamos da manutenção e prevenção, e estamos por perto quando
+        é preciso decidir ou agir.
+      </p>
+    </div>
+  </section>
+
+  <!-- O que muda para si -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="O que muda para si." />
+      <ul class="transform-list">
+        {
+          transforms.map((t) => (
+            <li class="transform-row">
+              <span class="transform-before">{t.before}</span>
+              <Icon name="arrow-right" size={18} class="transform-arrow" />
+              <span class="transform-after">{t.after}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Como funciona." />
+      <ol class="steps-list">
+        {
+          steps.map((s, i) => (
+            <li>
+              <span class="steps-number">{String(i + 1).padStart(2, "0")}</span>
+              <span>
+                <strong>{s.title}</strong> — {s.description}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- O que pode ser incluído -->
+  <section class="section" id="o-que-inclui">
+    <div class="container-content">
+      <SectionHeading heading="O que pode ser incluído." supporting="A avença adapta-se à sua empresa — o que faz sentido incluir depende do que já tem e do que precisa. Estas são as áreas que pode reunir num único acompanhamento:" />
+      <div class="included-frame">
+        <p class="label included-label">A avença pode incluir</p>
+        <div class="included-grid">
+          {included.map((s) => <ServiceCard {...s} />)}
+        </div>
+      </div>
+      <p class="included-note">Nem toda a avença inclui todas estas áreas — definimos juntos o que faz sentido para a sua empresa.</p>
+    </div>
+  </section>
+
+  <!-- Para quem faz sentido -->
+  <section class="section" id="para-quem-faz-sentido">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Para quem faz sentido." />
+      <ul class="check-list">
+        {
+          fits.map((f) => (
+            <li>
+              <Icon name="check" size={18} />
+              <span>{f}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Pontual ou avença -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Pontual ou avença — sem um ser “melhor” que o outro." />
+      <div class="modes-grid">
+        <div class="mode-block">
+          <h3>Pontual</h3>
+          <p>Resolve um problema concreto, sem compromisso continuado. Faz sentido quando só precisa de ajuda uma vez, ou quer experimentar antes de decidir mais.</p>
+        </div>
+        <div class="mode-block">
+          <h3>Avença</h3>
+          <p>Acompanhamento contínuo da sua informática, todos os meses. Faz mais sentido quando quer prevenção, previsibilidade, e alguém responsável a longo prazo.</p>
+        </div>
+      </div>
+      <p class="modes-close">Nenhum dos dois é a opção "certa" para todas as empresas — a conversa inicial serve precisamente para perceber qual faz mais sentido para si.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Perguntas frequentes." />
+      <div class="faq-list">
+        {
+          faqs.map((f) => (
+            <FaqItem question={f.question}>
+              <p>{f.answer}</p>
+            </FaqItem>
+          ))
+        }
+      </div>
+      <p class="faq-close">
+        Ainda tem dúvidas? <a href="#contacto" class="faq-close-link">Fale connosco</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section id="contacto">
+    <CtaSection subheading="Marque uma conversa sem compromisso — remoto em todo o país, presencial na Grande Lisboa e Margem Sul do Tejo." tone="graphite">
+      <Fragment slot="heading">Vamos perceber se uma avença faz sentido para a sua empresa.</Fragment>
+      <form class="contact-form" method="post">
+        <div class="contact-form-row">
+          <FormGroup label="Nome" for="s-name" required>
+            <Input id="s-name" name="name" required />
+          </FormGroup>
+          <FormGroup label="Empresa" for="s-company" required>
+            <Input id="s-company" name="company" required />
+          </FormGroup>
+        </div>
+        <div class="contact-form-row">
+          <FormGroup label="Email" for="s-email" required>
+            <Input id="s-email" name="email" type="email" required />
+          </FormGroup>
+          <FormGroup label="Telefone" for="s-phone">
+            <Input id="s-phone" name="phone" type="tel" />
+          </FormGroup>
+        </div>
+        <FormGroup label="Mensagem" for="s-message">
+          <Textarea id="s-message" name="message" rows={4} />
+        </FormGroup>
+        <Button type="submit" variant="primary">Fale connosco</Button>
+      </form>
+    </CtaSection>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-layout {
+      grid-template-columns: 1.6fr 1fr;
+      gap: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-layout {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    max-width: 40rem;
+  }
+
+  .hero-sub {
+    color: var(--color-muted);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-top: 0.5rem;
+  }
+
+  .hero-image-wrap {
+    justify-self: end;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .section {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-narrow {
+    max-width: 56rem;
+  }
+
+  .section :global(.section-heading) {
+    margin-bottom: 2rem;
+  }
+
+  /* Reconhece este padrão */
+  .problem-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    font-size: 1.0625rem;
+    color: var(--color-text);
+  }
+
+  .problem-list li {
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .problem-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+  }
+
+  .problem-close {
+    margin-top: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+    max-width: var(--container-prose);
+  }
+
+  /* Statement */
+  .statement-body {
+    color: var(--color-muted);
+    max-width: var(--container-prose);
+  }
+
+  /* O que muda para si — transform list */
+  .transform-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .transform-row {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    flex-wrap: wrap;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px dashed var(--color-border);
+    font-size: 1.0625rem;
+  }
+
+  .transform-row:last-child {
+    border-bottom: none;
+  }
+
+  .transform-before {
+    color: var(--color-muted);
+  }
+
+  .transform-row :global(.transform-arrow) {
+    color: var(--color-amber);
+    flex-shrink: 0;
+  }
+
+  .transform-after {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-graphite);
+  }
+
+  /* Como funciona */
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .steps-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .steps-number {
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    font-size: 0.875rem;
+    color: var(--color-amber-hover);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .steps-list strong {
+    font-family: var(--font-heading);
+  }
+
+  /* O que pode ser incluído */
+  .included-frame {
+    background: var(--color-amber-tint);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 1.25rem + 1vw, 2.25rem);
+  }
+
+  .included-label {
+    margin-bottom: 1.25rem;
+  }
+
+  .included-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .included-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .included-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .included-grid :global(.service-card) {
+    background: var(--color-surface);
+  }
+
+  .included-note {
+    margin-top: 1.25rem;
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+  }
+
+  /* Pontual ou avença */
+  .modes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .modes-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  .mode-block h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .mode-block p {
+    color: var(--color-muted);
+  }
+
+  .modes-close {
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+    max-width: var(--container-prose);
+  }
+
+  /* FAQ */
+  .faq-close {
+    margin-top: 1.5rem;
+    color: var(--color-muted);
+  }
+
+  .faq-close-link {
+    color: var(--color-graphite);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .faq-close-link:hover {
+    color: var(--color-amber-hover);
+  }
+
+  /* CTA final */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    text-align: left;
+  }
+
+  .contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.125rem;
+  }
+
+  @media (min-width: 640px) {
+    .contact-form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-form :global(.form-label) {
+    color: var(--color-surface);
+  }
+
+  .contact-form :global(.form-hint) {
+    color: color-mix(in srgb, var(--color-surface) 65%, transparent);
+  }
+</style>

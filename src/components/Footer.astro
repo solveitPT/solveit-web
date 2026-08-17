@@ -1,0 +1,170 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+
+const serviceLinks = [
+  { label: "Suporte IT", href: "/servicos/suporte-it" },
+  { label: "Segurança", href: "/servicos/seguranca" },
+  { label: "Backups", href: "/servicos/backups" },
+  { label: "Cloud & Microsoft 365", href: "/servicos/cloud-microsoft-365" },
+  { label: "Redes & Wi-Fi", href: "/servicos/redes-e-wifi" },
+  { label: "Consultoria IT", href: "/servicos/consultoria-it" },
+];
+
+const companyLinks = [
+  { label: "Sobre a SolveIT", href: "/sobre" },
+  { label: "Soluções / Avenças", href: "/solucoes" },
+  { label: "Contactos", href: "/contactos" },
+];
+
+const legalLinks = [
+  { label: "Política de Privacidade", href: "/politica-privacidade" },
+  { label: "Política de Cookies", href: "/politica-cookies" },
+];
+---
+
+<footer class="site-footer surface-dark">
+  <div class="container-content site-footer-top">
+    <div class="site-footer-brand">
+      <Logo theme="mono" wordmark="mono" />
+      <p class="site-footer-tagline">We Solve IT.</p>
+      <p class="site-footer-area">
+        Suporte informático para empresas em Portugal.<br />
+        Remoto nacional · Presencial na Grande Lisboa e Margem Sul do Tejo.
+      </p>
+    </div>
+
+    <nav class="site-footer-col" aria-label="Serviços">
+      <p class="label site-footer-col-title">Serviços</p>
+      <ul>
+        {serviceLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav class="site-footer-col" aria-label="Empresa">
+      <p class="label site-footer-col-title">Empresa</p>
+      <ul>
+        {companyLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div class="site-footer-col">
+      <p class="label site-footer-col-title">Contacto direto</p>
+      <ul>
+        <li>
+          <a href="#" class="site-footer-contact">
+            <Icon name="mail" size={16} /> [PLACEHOLDER: email de contacto]
+          </a>
+        </li>
+        <li>
+          <a href="tel:+351000000000" class="site-footer-contact">
+            <Icon name="phone" size={16} /> [PLACEHOLDER: número de telefone]
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container-content site-footer-bottom">
+    <p class="site-footer-legal">
+      [PLACEHOLDER: Nome legal da empresa, NIF, sede social — a confirmar antes do lançamento] ·
+      © {new Date().getFullYear()} SolveIT
+    </p>
+    <ul class="site-footer-legal-links">
+      {legalLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-graphite);
+    color: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  }
+
+  .site-footer-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-block: clamp(3rem, 2.2rem + 3vw, 4.5rem) 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .site-footer-top {
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    }
+  }
+
+  .site-footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .site-footer-tagline {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: var(--color-amber);
+    font-size: 0.9375rem;
+  }
+
+  .site-footer-area {
+    color: color-mix(in srgb, var(--color-surface) 65%, transparent);
+    font-size: 0.875rem;
+    max-width: 32ch;
+  }
+
+  .site-footer-col-title {
+    margin-bottom: 1rem;
+  }
+
+  .site-footer-col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .site-footer-col a {
+    font-size: 0.9375rem;
+    color: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    transition: color var(--duration-base) var(--ease-standard);
+  }
+
+  .site-footer-col a:hover {
+    color: var(--color-amber);
+  }
+
+  .site-footer-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .site-footer-bottom {
+    border-top: 1px solid color-mix(in srgb, var(--color-surface) 15%, transparent);
+    padding-block: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .site-footer-legal {
+    font-size: 0.75rem;
+    color: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  }
+
+  .site-footer-legal-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .site-footer-legal-links a {
+    font-size: 0.75rem;
+    color: color-mix(in srgb, var(--color-surface) 65%, transparent);
+  }
+
+  .site-footer-legal-links a:hover {
+    color: var(--color-amber);
+  }
+</style>

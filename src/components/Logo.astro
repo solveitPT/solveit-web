@@ -1,0 +1,91 @@
+---
+/**
+ * SolveIT logo — approved symbol geometry (SYMBOL_EXPLORATION.md, "2A — Curvatura reforçada").
+ * Do not alter the path data or introduce new conceptual variants here; this is the
+ * single source of truth other components should reuse.
+ */
+interface Props {
+  /** "full" = mark + wordmark, "mark" = symbol only */
+  variant?: "full" | "mark";
+  /** "color" = graphite ring + amber release, "mono" = single currentColor stroke */
+  theme?: "color" | "mono";
+  /** "two-tone" = Solve grafite + IT âmbar, "mono" = SolveIT in a single color (inherits currentColor) */
+  wordmark?: "two-tone" | "mono";
+  /** Symbol height in pixels; wordmark scales proportionally via font-size */
+  size?: number;
+  class?: string;
+}
+
+const {
+  variant = "full",
+  theme = "color",
+  wordmark = "two-tone",
+  size = 28,
+  class: className,
+} = Astro.props;
+
+const ringColor = theme === "color" ? "#1e2124" : "currentColor";
+const releaseColor = theme === "color" ? "#d98c2b" : "currentColor";
+---
+
+<span class:list={["logo", className]} style={{ "--logo-size": `${size}px` }}>
+  <svg
+    class="logo-mark"
+    viewBox="0 0 40 40"
+    fill="none"
+    role="img"
+    aria-label="SolveIT"
+    width={size}
+    height={size}
+  >
+    <path
+      d="M22.5 13.5 A9 9 0 1 1 15 25"
+      stroke={ringColor}
+      stroke-width="3.4"
+      stroke-linecap="round"
+    ></path>
+    <path
+      d="M15.6 24.2 L22.5 18"
+      stroke={releaseColor}
+      stroke-width="3.4"
+      stroke-linecap="square"
+    ></path>
+  </svg>
+  {
+    variant === "full" && (
+      <span class:list={["logo-word", { "logo-word--mono": wordmark === "mono" }]}>
+        Solve<span class="logo-word-it">IT</span>
+      </span>
+    )
+  }
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--logo-size) * 0.28);
+    line-height: 1;
+  }
+
+  .logo-mark {
+    flex-shrink: 0;
+  }
+
+  .logo-word {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: calc(var(--logo-size) * 0.68);
+    letter-spacing: -0.01em;
+    color: var(--color-graphite);
+  }
+
+  .logo-word-it {
+    color: var(--color-amber);
+  }
+
+  .logo-word--mono,
+  .logo-word--mono .logo-word-it {
+    color: currentColor;
+  }
+</style>

@@ -1,0 +1,485 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/Button.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import Icon from "../../components/Icon.astro";
+import FaqItem from "../../components/FaqItem.astro";
+import CtaSection from "../../components/CtaSection.astro";
+import FormGroup from "../../components/form/FormGroup.astro";
+import Input from "../../components/form/Input.astro";
+import Textarea from "../../components/form/Textarea.astro";
+import driveImage from "../../assets/images/services/backup-drive-status-light.jpg";
+
+const problems = [
+  "Um disco avaria sem aviso.",
+  "Alguém apaga uma pasta importante sem querer.",
+  "Um ficheiro fica corrompido e ninguém dá por isso durante semanas.",
+  "Um ataque encripta os seus ficheiros e pede resgate para os devolver.",
+  "Existe uma cópia de segurança — mas nunca ninguém verificou se funciona.",
+];
+
+const scopeGroups = [
+  { title: "Computadores e equipamento principal", description: "O computador ou servidor que a sua empresa não pode perder." },
+  { title: "Ficheiros e documentos de trabalho", description: "Contratos, faturas, dados de clientes." },
+  { title: "Email e Microsoft 365", description: "Disponível como serviço; a inclusão na avença base ou como extra fica definida quando a estrutura de preços estiver fechada." },
+  { title: "Sistemas específicos do seu negócio", description: "Software de faturação ou gestão, avaliados caso a caso, consoante o sistema em questão." },
+];
+
+const steps = [
+  { title: "Backup", description: "Cópias automáticas dos seus dados. A frequência é definida de acordo com a importância dos dados e a forma como a sua empresa trabalha, não é um número fixo para toda a gente." },
+  { title: "Monitorização", description: "Verificamos que as cópias estão mesmo a acontecer, sem precisar de estar a vigiar." },
+  { title: "Verificação", description: "Testamos periodicamente que os dados guardados conseguem realmente ser restaurados." },
+  { title: "Recuperação", description: "Quando é preciso, restauramos os dados — é o objetivo desde o início." },
+];
+
+const faqs = [
+  {
+    question: "Com que frequência são feitas as cópias de segurança?",
+    answer: "Não há uma frequência única para todas as empresas — definimos a frequência de acordo com a importância dos dados e a forma como a sua empresa trabalha, não um número genérico aplicado a todos os casos.",
+  },
+  {
+    question: "Como sabem que o backup está a funcionar sem eu ter de verificar?",
+    answer: "Monitorizamos se as cópias estão a acontecer como esperado, e testamos periodicamente se conseguimos mesmo restaurar os dados — não ficamos à espera de precisar para descobrir se funciona.",
+  },
+  {
+    question: "Se eu for vítima de um ataque de ransomware, conseguem recuperar tudo?",
+    answer: "Não podemos garantir a recuperação total em todos os cenários — cada incidente é diferente — mas o objetivo do sistema de backups é precisamente permitir recuperar os seus dados sem ter de pagar um resgate. Avaliamos cada situação caso a caso.",
+  },
+  {
+    question: "Os backups ficam guardados onde?",
+    answer: "As cópias são sempre mantidas em localizações separadas do equipamento original — não faria sentido guardar o backup no mesmo sítio que pode falhar. Consoante o cenário, podemos combinar armazenamento local e cloud.",
+  },
+  {
+    question: "Preciso de ter backups mesmo sendo uma empresa pequena?",
+    answer: "Sim — o risco de perder dados não depende do tamanho da empresa. Muitas vezes, uma empresa pequena sente mais o impacto de perder ficheiros importantes, precisamente por não ter uma equipa de IT interna para reagir rapidamente.",
+  },
+];
+---
+
+<BaseLayout
+  title="Backups para Empresas"
+  description="Backup, monitorização e verificação de dados para a sua empresa, com foco em conseguir recuperar quando for preciso — não apenas copiar ficheiros."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container-content hero-layout">
+      <div class="hero-text">
+        <a href="/servicos" class="breadcrumb">Serviços</a>
+        <h1>Se o computador principal da sua empresa falhasse amanhã, conseguia continuar a trabalhar?</h1>
+        <p class="hero-sub body-lg">
+          Um backup só é útil se conseguir mesmo recuperar os seus dados quando precisar. Tratamos da cópia, da
+          verificação e da recuperação — não só de copiar ficheiros.
+        </p>
+        <div class="hero-actions">
+          <Button href="#contacto" variant="primary">Marcar uma conversa</Button>
+          <Button href="#como-funciona" variant="secondary">Ver como funciona</Button>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <Image
+          src={driveImage}
+          alt="Disco de backup externo com luz de estado acesa, numa secretária de madeira."
+          class="hero-image"
+          widths={[350, 500, 700]}
+          sizes="(min-width: 1024px) 22rem, (min-width: 768px) 30vw, 100vw"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- As formas mais comuns de perder dados -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="As formas mais comuns de perder dados." />
+      <ul class="problem-list">
+        {problems.map((p) => <li>{p}</li>)}
+      </ul>
+      <p class="problem-close">É por isto que ter só "uma cópia" não costuma chegar.</p>
+    </div>
+  </section>
+
+  <!-- O que protegemos -->
+  <section class="section">
+    <div class="container-content">
+      <SectionHeading heading="O que protegemos." />
+      <div class="scope-grid">
+        {
+          scopeGroups.map((g) => (
+            <div class="scope-group">
+              <h3>{g.title}</h3>
+              <p>{g.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section class="section" id="como-funciona">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Como funciona." />
+      <ol class="steps-list">
+        {
+          steps.map((s, i) => (
+            <li>
+              <span class="steps-number">{String(i + 1).padStart(2, "0")}</span>
+              <span>
+                <strong>{s.title}</strong> — {s.description}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Statement 1 -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Uma cópia de segurança só vale alguma coisa se souber que funciona." />
+      <p class="statement-body body-lg">
+        Não basta configurar um backup uma vez e esquecer. Monitorizamos se as cópias estão a acontecer como
+        esperado, e testamos periodicamente a recuperação — para a primeira vez que restauramos os seus dados não
+        ser também a primeira vez que descobrimos se funciona.
+      </p>
+    </div>
+  </section>
+
+  <!-- Statement 2 -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Recuperação quando é necessário." />
+      <p class="statement-body body-lg">
+        Se perder ficheiros, se um equipamento avariar, ou se for alvo de um incidente como um ataque de ransomware,
+        o processo de recuperação começa de imediato: identificamos o que precisa de ser restaurado, e repomos os
+        dados a partir da cópia mais recente e íntegra disponível. Cada situação é avaliada individualmente — não
+        prometemos que qualquer cenário é sempre 100% recuperável, mas a recuperação é sempre a nossa prioridade
+        imediata.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pontual ou acompanhamento contínuo -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Pontual ou acompanhamento contínuo." />
+      <div class="modes-grid">
+        <div class="mode-block">
+          <h3>Pontual</h3>
+          <p>Configuração inicial de um sistema de backups, ou apoio pontual numa recuperação, sem compromisso continuado.</p>
+        </div>
+        <div class="mode-block">
+          <h3>Avença</h3>
+          <p>Backup, monitorização e verificação contínuos, como parte do acompanhamento regular da sua informática — para nunca ter de se perguntar se está protegido.</p>
+        </div>
+      </div>
+      <a href="/solucoes" class="mode-link">
+        Conhecer a avença
+        <Icon name="arrow-right" size={16} />
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container-content section-narrow">
+      <SectionHeading heading="Perguntas frequentes." />
+      <div class="faq-list">
+        {
+          faqs.map((f) => (
+            <FaqItem question={f.question}>
+              <p>{f.answer}</p>
+            </FaqItem>
+          ))
+        }
+      </div>
+      <p class="faq-close">
+        Ainda tem dúvidas? <a href="#contacto" class="faq-close-link">Fale connosco</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section id="contacto">
+    <CtaSection subheading="Descreva a sua situação atual — remoto em todo o país, presencial na Grande Lisboa e Margem Sul do Tejo." tone="graphite">
+      <Fragment slot="heading">Vamos proteger os seus dados.</Fragment>
+      <form class="contact-form" method="post">
+        <div class="contact-form-row">
+          <FormGroup label="Nome" for="b-name" required>
+            <Input id="b-name" name="name" required />
+          </FormGroup>
+          <FormGroup label="Empresa" for="b-company" required>
+            <Input id="b-company" name="company" required />
+          </FormGroup>
+        </div>
+        <div class="contact-form-row">
+          <FormGroup label="Email" for="b-email" required>
+            <Input id="b-email" name="email" type="email" required />
+          </FormGroup>
+          <FormGroup label="Telefone" for="b-phone">
+            <Input id="b-phone" name="phone" type="tel" />
+          </FormGroup>
+        </div>
+        <FormGroup label="Mensagem" for="b-message">
+          <Textarea id="b-message" name="message" rows={4} />
+        </FormGroup>
+        <Button type="submit" variant="primary">Fale connosco</Button>
+      </form>
+    </CtaSection>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ============ Hero (with image) ============ */
+  .hero {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem);
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-layout {
+      grid-template-columns: 1.6fr 1fr;
+      gap: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-layout {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    max-width: 40rem;
+  }
+
+  .breadcrumb {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .breadcrumb:hover {
+    color: var(--color-amber-hover);
+  }
+
+  .hero-sub {
+    color: var(--color-muted);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    margin-top: 0.5rem;
+  }
+
+  .hero-image-wrap {
+    justify-self: end;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  /* ============ Shared section rhythm ============ */
+  .section {
+    padding-block: clamp(3rem, 2.2rem + 3vw, 5.5rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .section-narrow {
+    max-width: 56rem;
+  }
+
+  .section :global(.section-heading) {
+    margin-bottom: 2rem;
+  }
+
+  /* ============ Problems ============ */
+  .problem-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    font-size: 1.0625rem;
+    color: var(--color-text);
+  }
+
+  .problem-list li {
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .problem-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-secondary);
+  }
+
+  .problem-close {
+    margin-top: 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+
+  /* ============ O que protegemos ============ */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .scope-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem 2rem;
+    }
+  }
+
+  .scope-group h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .scope-group p {
+    color: var(--color-muted);
+    font-size: 0.9375rem;
+  }
+
+  /* ============ Como funciona ============ */
+  .steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .steps-list li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .steps-number {
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    font-size: 0.875rem;
+    color: var(--color-amber-hover);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .steps-list strong {
+    font-family: var(--font-heading);
+  }
+
+  /* ============ Statement sections ============ */
+  .statement-body {
+    color: var(--color-muted);
+    max-width: var(--container-prose);
+  }
+
+  /* ============ Pontual ou avença ============ */
+  .modes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .modes-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  .mode-block h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .mode-block p {
+    color: var(--color-muted);
+  }
+
+  .mode-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-graphite);
+    transition: gap var(--duration-base) var(--ease-standard);
+  }
+
+  .mode-link:hover {
+    gap: 0.625rem;
+    color: var(--color-amber-hover);
+  }
+
+  /* ============ FAQ ============ */
+  .faq-close {
+    margin-top: 1.5rem;
+    color: var(--color-muted);
+  }
+
+  .faq-close-link {
+    color: var(--color-graphite);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .faq-close-link:hover {
+    color: var(--color-amber-hover);
+  }
+
+  /* ============ CTA final ============ */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    text-align: left;
+  }
+
+  .contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.125rem;
+  }
+
+  @media (min-width: 640px) {
+    .contact-form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-form :global(.form-label) {
+    color: var(--color-surface);
+  }
+
+  .contact-form :global(.form-hint) {
+    color: color-mix(in srgb, var(--color-surface) 65%, transparent);
+  }
+</style>

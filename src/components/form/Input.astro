@@ -1,0 +1,36 @@
+---
+interface Props {
+  type?: "text" | "email" | "tel";
+  id: string;
+  name: string;
+  placeholder?: string;
+  required?: boolean;
+  invalid?: boolean;
+  "aria-describedby"?: string;
+  class?: string;
+}
+
+const {
+  type = "text",
+  id,
+  name,
+  placeholder,
+  required = false,
+  invalid = false,
+  "aria-describedby": describedBy,
+  class: className,
+} = Astro.props;
+---
+
+<input
+  class:list={["field", { "field--invalid": invalid }, className]}
+  type={type}
+  id={id}
+  name={name}
+  placeholder={placeholder}
+  required={required}
+  aria-invalid={invalid ? "true" : undefined}
+  aria-describedby={describedBy}
+/>
+
+<!-- Shared .field styling lives in src/styles/global.css so Input and Textarea stay in sync -->
