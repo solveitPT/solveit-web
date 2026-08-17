@@ -4,6 +4,16 @@
 
 > **Phase 0 — Discovery: concluída.** Ver secção 13 ("Decisions Locked") para o resultado. As secções deste documento foram atualizadas para refletir as decisões tomadas.
 
+> ## 🔶 PROJETO EM PAUSA (2026-08-17)
+>
+> Site completo e em produção em **[solve-it.pt](https://solve-it.pt)** — todas as páginas principais implementadas (homepage, 6 páginas de serviço, `/solucoes`, `/sobre`, `/contactos` com formulário funcional via Web3Forms). Ver Phase 11 (secção 11) para o estado completo do deployment.
+>
+> **Para retomar, falta fechar:**
+> 1. **Estrutura de preços da avença** — `/solucoes` está publicada sem valores, com CTA de orçamento no lugar. Quando os preços estiverem definidos, atualiza-se a página sem redesenho (estrutura já preparada para isso).
+> 2. **Contactos reais da empresa** — dados legais (nome legal, NIF, sede) ainda não fornecidos; o footer foi simplificado para não mostrar placeholders visíveis, mas falta a informação real antes do lançamento oficial/marketing a sério. Telefone também por confirmar, se vier a existir um.
+> 3. **Deploy automático** — o site está no ar via upload manual à Cloudflare (não Git-conectado; a integração "Connect to Git" falhou por um erro do lado do GitHub Apps e ainda não foi possível ligar). Sempre que houver alterações de código, é preciso repetir `npm run build` + upload manual da pasta `dist/`, ou retomar a tentativa de ligação Git.
+> 4. Itens menores por fazer, sem bloquear nada: Google Search Console, GA4 (decidido no Discovery, ainda não implementado — implica banner de cookies), Política de Privacidade e Política de Cookies (páginas ainda não escritas).
+
 ---
 
 ## 1. Resumo da análise
