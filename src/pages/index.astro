@@ -44,11 +44,31 @@ const differentiators = [
 ];
 
 const faqs = [
-  "Preciso de mudar de fornecedor de informática para experimentar?",
-  "Como funciona a avença mensal?",
-  "Trabalham só remotamente ou também presencialmente?",
-  "E se eu só precisar de ajuda uma vez?",
-  "Quanto tempo demora a primeira resposta?",
+  {
+    question: "Preciso de mudar de fornecedor de informática para experimentar?",
+    answer:
+      "Não. Pode começar com um pedido de ajuda pontual, sem mudar de fornecedor nem assinar qualquer compromisso — é uma forma simples de nos conhecer antes de decidir mais.",
+  },
+  {
+    question: "Como funciona a avença mensal?",
+    answer:
+      "A avença é um acompanhamento mensal da informática da sua empresa — conhecemos a sua empresa, cuidamos da manutenção e prevenção, e estamos por perto quando é preciso decidir ou agir. Veja em detalhe em Soluções.",
+  },
+  {
+    question: "Trabalham só remotamente ou também presencialmente?",
+    answer:
+      "As duas coisas. Resolvemos remotamente sempre que possível, porque costuma ser mais rápido — e vamos ao seu escritório quando é mesmo necessário, na Grande Lisboa e Margem Sul do Tejo.",
+  },
+  {
+    question: "E se eu só precisar de ajuda uma vez?",
+    answer:
+      "Sem problema. Pode pedir ajuda pontual sem compromisso continuado — é exatamente para isso que essa opção existe. Se mais tarde fizer mais sentido ter um acompanhamento contínuo, falamos sobre a avença nessa altura.",
+  },
+  {
+    question: "Quanto tempo demora a primeira resposta?",
+    answer:
+      "Ainda não temos um tempo de resposta fixo definido para todas as situações — mas percebemos a urgência do seu caso logo na primeira conversa, para agir o mais rápido possível.",
+  },
 ];
 ---
 
@@ -211,9 +231,9 @@ const faqs = [
       <SectionHeading heading="Perguntas frequentes." />
       <div class="faq-list">
         {
-          faqs.map((q) => (
-            <FaqItem question={q}>
-              <p>[Conteúdo a confirmar]</p>
+          faqs.map((f) => (
+            <FaqItem question={f.question}>
+              <p>{f.answer}</p>
             </FaqItem>
           ))
         }
